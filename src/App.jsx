@@ -1,7 +1,8 @@
-﻿import React, { Suspense } from 'react';
+﻿import React, { Suspense, useRef, useState } from 'react';
 import { Canvas } from '@react-three/fiber';
 import { motion } from 'framer-motion';
-import { Mail, Phone, ExternalLink, Cpu, Database, Code, Brain } from 'lucide-react';
+import emailjs from '@emailjs/browser';
+import { Mail, ExternalLink, Cpu, Database, Code, Brain } from 'lucide-react';
 import { ParticleBackground, NeuralSphere } from './components/visuals';
 
 const SectionWrapper = ({ children, id, className = '' }) => (
@@ -23,7 +24,7 @@ const SectionTitle = ({ number, title }) => (
 const GlassCard = ({ children, className = '' }) => (
   <motion.div
     whileHover={{ y: -6 }}
-    className={`relative overflow-hidden rounded-[2rem] border border-white/10 bg-slate-950/60 p-6 shadow-[0_40px_120px_-60px_rgba(15,23,42,0.95)] backdrop-blur-xl transition-all duration-300 ${className}`}>
+    className={`relative overflow-hidden rounded-[2rem] border border-white/10 bg-slate-950/60 p-8 shadow-[0_40px_120px_-60px_rgba(15,23,42,0.95)] backdrop-blur-xl transition-all duration-300 ${className}`}>
     <div className="absolute inset-0 bg-gradient-to-br from-white/5 via-transparent to-white/5 opacity-50" />
     <div className="relative">{children}</div>
   </motion.div>
@@ -32,73 +33,123 @@ const GlassCard = ({ children, className = '' }) => (
 export default function App() {
   const experience = [
     {
-      role: 'AI/ML Engineer Intern',
-      company: 'Innovative AI Labs',
-      period: '2024 – 2025',
-      description: 'Developed end-to-end AI systems with a strong emphasis on model reliability, semantic search, and scalable API design.',
+      role: 'Machine Learning Intern',
+      company: 'Dive Deep AI',
+      period: 'July 2025 – August 2025',
+      description:
+        'Built a Retrieval-Augmented Generation (RAG) legal clause chatbot using FAISS for accurate semantic query retrieval.',
       highlights: [
-        'Built a retrieval-augmented generation pipeline using FAISS and vector search.',
-        'Designed production-ready FastAPI services for inference and logging.',
-        'Optimized NLP workflows to improve generation quality and latency.',
+        'Implemented semantic search with FAISS to deliver fast, relevant legal responses.',
+        'Developed transfer learning image classification models using MobileNetV2 and ResNet101.',
+        'Achieved 90%+ classification accuracy through model optimization and fine-tuning.',
       ],
     },
     {
-      role: 'Software Engineer Intern',
-      company: 'Next-Gen ML Platforms',
-      period: '2023 – 2024',
-      description: 'Supported ML production infrastructure and automated deployment workflows for internal AI research products.',
+      role: 'Data Science Intern',
+      company: 'Developer’s Hub',
+      period: 'September 2024 – December 2024',
+      description:
+        'Designed and deployed machine learning models integrated into production-level web applications.',
       highlights: [
-        'Integrated Docker and CI pipelines for repeatable model deployments.',
-        'Implemented data validation and monitoring for model prediction services.',
-        'Collaborated with product teams to translate research into user-facing applications.',
+        'Improved decision-making efficiency by 30% through optimized predictive modeling.',
+        'Delivered end-to-end ML pipelines from data preprocessing to deployment.',
+        'Built production-ready model APIs with FastAPI and Flask for web integration.',
       ],
     },
   ];
 
   const certifications = [
+    { title: 'Machine Learning with Python', issuer: 'freeCodeCamp', year: '2025' },
+    { title: 'Full Stack AI Engineer', issuer: 'Udemy', year: '2025' },
+    { title: 'Mastering PyTorch', issuer: 'Udemy', year: '2025' },
+    { title: 'Certified AI Engineering Master Class', issuer: 'Udemy', year: '2025' },
+    { title: 'TensorFlow Master Class', issuer: 'Udemy', year: '2025' },
+    { title: 'Azure DevOps', issuer: 'Udemy', year: '2025' },
+  ];
+
+  const education = [
     {
-      title: 'Google Cloud Professional ML Engineer',
-      issuer: 'Google',
-      year: '2025',
-    },
-    {
-      title: 'AI and Machine Learning Specialization',
-      issuer: 'Coursera',
-      year: '2024',
-    },
-    {
-      title: 'NLP with Deep Learning',
-      issuer: 'DeepLearning.AI',
-      year: '2024',
+      degree: 'Bachelor of Science in Computer Science (BSCS)',
+      institution: 'Bahria University Islamabad',
+      year: '2021 – 2025',
     },
   ];
 
+  const interests = [
+    'Machine Learning Engineering',
+    'Natural Language Processing',
+    'Retrieval-Augmented Generation (RAG)',
+    'AI Automation Systems',
+    'Intelligent EdTech Platforms',
+  ];
+
   const skills = {
-    'ML & Deep Learning': ['Scikit-Learn', 'PyTorch', 'TensorFlow', 'Model Evaluation'],
-    'NLP & GenAI': ['LLMs', 'Transformers', 'RAG Pipelines', 'Prompt Engineering', 'FAISS'],
-    'Backend & Tools': ['FastAPI', 'Flask', 'Docker', 'Git', 'Celery', 'MongoDB'],
+    'Programming & Tools': ['Python', 'JavaScript', 'C++', 'SQL', 'Git', 'GitHub', 'Docker', 'Pandas', 'NumPy', 'VS Code'],
+    'AI & Machine Learning': ['Scikit-learn', 'PyTorch', 'TensorFlow', 'Deep Learning', 'Transfer Learning', 'Computer Vision', 'Predictive Modeling', 'Model Evaluation'],
+    'NLP & Retrieval': ['Transformers', 'LLMs', 'Embeddings', 'RAG Pipelines', 'Sentence Transformers', 'Vector Databases', 'FAISS'],
   };
 
   const projects = [
     {
-      title: 'Legal Clause Analyzer',
-      desc: 'RAG-based legal assistant using FAISS and Gemini for semantic search.',
-      tech: ['FastAPI', 'FAISS', 'Gemini', 'Python'],
+      title: 'AI-Based Skill Game',
+      desc: 'Built an adaptive mobile quiz app using Gemini Flash 1.5 API with dynamic difficulty levels.',
+      tech: ['React Native', 'MongoDB', 'Gemini Flash', 'Python'],
       link: '#',
     },
     {
-      title: 'AI Skill Game',
-      desc: 'Adaptive quiz generation system with Gemini Flash integration.',
-      tech: ['React Native', 'MongoDB', 'Gemini API'],
+      title: 'Enhanced Smart Legal Clause Analyzer',
+      desc: 'Designed a RAG system with FAISS for document chunking, embeddings, and semantic search.',
+      tech: ['FastAPI', 'FAISS', 'Celery', 'Python'],
       link: '#',
     },
     {
-      title: 'Video-to-Quiz Platform',
-      desc: 'Automatic transcription and quiz generation from video content.',
-      tech: ['Deepgram', 'Gemini', 'FastAPI'],
+      title: 'AI Automation Customer Support Agent',
+      desc: 'Built a scalable conversational AI for ticket classification, routing, and context-aware responses.',
+      tech: ['FastAPI', 'Gemini APIs', 'Python', 'NLP'],
+      link: '#',
+    },
+    {
+      title: 'Video-to-Quiz AI Learning Platform',
+      desc: 'Converted lecture videos into MCQs using Deepgram transcription and Gemini-powered question generation.',
+      tech: ['Deepgram', 'Gemini', 'FastAPI', 'Python'],
+      link: '#',
+    },
+    {
+      title: 'PDF Chatbot (RAG-Based System)',
+      desc: 'Built a multi-document chatbot with embedding retrieval and semantic search across PDF datasets.',
+      tech: ['FastAPI', 'Embeddings', 'Python', 'Vector Search'],
       link: '#',
     },
   ];
+
+  const formRef = useRef(null);
+  const [sending, setSending] = useState(false);
+  const [statusMessage, setStatusMessage] = useState('');
+
+  const handleEmailSend = (event) => {
+    event.preventDefault();
+    setSending(true);
+    setStatusMessage('');
+
+    emailjs
+      .sendForm(
+        'service_qngik5p',
+        'template_e7ne0wc',
+        formRef.current,
+        'DSBbfTAfTNs_THD4-'
+      )
+      .then(
+        () => {
+          setStatusMessage('Message sent successfully!');
+          setSending(false);
+          event.target.reset();
+        },
+        () => {
+          setStatusMessage('Unable to send message at the moment. Please try again later.');
+          setSending(false);
+        }
+      );
+  };
 
   return (
     <div className="min-h-screen overflow-hidden bg-[radial-gradient(circle_at_top_left,_rgba(56,189,248,0.16),_transparent_25%),radial-gradient(circle_at_bottom_right,_rgba(168,85,247,0.16),_transparent_18%),linear-gradient(180deg,_#020617_0%,_#0f172a_100%)] text-text selection:bg-accent/30">
@@ -119,7 +170,7 @@ export default function App() {
               transition={{ duration: 0.8, ease: 'easeOut' }}
               className="inline-flex items-center gap-3 rounded-full border border-accent/30 bg-slate-950/70 px-4 py-2 text-sm text-accent shadow-[0_15px_50px_-30px_rgba(56,189,248,0.85)]"
             >
-              AI Portfolio · NLP · RAG Systems · Production-ready ML
+              AI | Machine Learning | NLP | LLMs | RAG | Transformers | FAISS
             </motion.div>
 
             <motion.div
@@ -129,11 +180,12 @@ export default function App() {
               className="space-y-6"
             >
               <h1 className="text-5xl md:text-6xl lg:text-7xl font-semibold leading-tight tracking-tight text-white">
-                Muhammad Maawaz <br></br>I build intelligent AI products with compelling user experiences.
+                Muhammad Maawaz
+                <br />AI, Machine Learning & NLP Engineer
               </h1>
               <p className="max-w-2xl text-lg text-slate-300 sm:text-xl">
-                I help companies turn data into intelligent systems using NLP, RAG, and scalable ML architectures.
-                My work blends modern engineering with clean product design.
+                Computer Science graduate specialized in Machine Learning, Artificial Intelligence, and Natural Language Processing.
+                Experienced in building end-to-end AI systems including RAG pipelines, vector search, intelligent chatbots, and production-ready backend APIs.
               </p>
 
               <div className="flex flex-col gap-4 sm:flex-row">
@@ -246,16 +298,16 @@ export default function App() {
         <SectionTitle number="04." title="Featured Work" />
         <div className="grid gap-8 md:grid-cols-2 xl:grid-cols-3">
           {projects.map((project, idx) => (
-            <GlassCard key={idx} className="group flex flex-col justify-between gap-6 p-8">
+            <GlassCard key={idx} className="group flex flex-col justify-between gap-8 p-8">
               <div className="flex items-center justify-between">
                 <Code className="text-accent" size={30} />
                 <ExternalLink className="text-slate-400 transition group-hover:text-accent" size={20} />
               </div>
-              <div>
+              <div className="space-y-5">
                 <h3 className="text-2xl font-semibold text-white">{project.title}</h3>
-                <p className="mt-4 text-sm leading-relaxed text-slate-300">{project.desc}</p>
+                <p className="text-sm leading-relaxed text-slate-300">{project.desc}</p>
               </div>
-              <div className="flex flex-wrap gap-2">
+              <div className="flex flex-wrap gap-3 pt-4">
                 {project.tech.map(t => (
                   <span key={t} className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-[11px] uppercase tracking-[0.24em] text-accent">
                     {t}
@@ -280,23 +332,88 @@ export default function App() {
         </div>
       </SectionWrapper>
 
+      <SectionWrapper id="education">
+        <SectionTitle number="06." title="Education" />
+        <div className="grid gap-6 md:grid-cols-2">
+          {education.map((item, idx) => (
+            <GlassCard key={idx} className="space-y-3 p-6">
+              <h3 className="text-2xl font-semibold text-white">{item.degree}</h3>
+              <p className="text-slate-400">{item.institution}</p>
+              <span className="inline-flex rounded-full border border-accent/20 bg-white/5 px-3 py-2 text-xs uppercase tracking-[0.24em] text-accent">{item.year}</span>
+            </GlassCard>
+          ))}
+        </div>
+      </SectionWrapper>
+
+      <SectionWrapper id="interests">
+        <SectionTitle number="07." title="Areas of Interest" />
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {interests.map((interest, idx) => (
+            <GlassCard key={idx} className="p-5">
+              <p className="text-slate-200">{interest}</p>
+            </GlassCard>
+          ))}
+        </div>
+      </SectionWrapper>
+
       <SectionWrapper id="contact">
-        <SectionTitle number="06." title="Get In Touch" />
+        <SectionTitle number="08." title="Get In Touch" />
         <div className="grid gap-8 lg:grid-cols-[1.2fr_0.8fr]">
-          <GlassCard className="space-y-6 px-10 py-12">
+          <GlassCard className="space-y-6 px-8 py-10">
             <p className="text-slate-300 leading-relaxed">
-              I'm actively looking for new opportunities in AI/ML Engineering. If you'd like to collaborate on a project or learn more about my work, send a message and let's connect.
+              I'm actively looking for new opportunities in AI/ML Engineering. Send a message below and I'll reply as soon as possible.
             </p>
-            <a href="mailto:maawazali111@gmail.com" className="inline-flex items-center gap-3 rounded-full bg-accent/95 px-6 py-3 text-sm font-semibold text-slate-950 transition hover:scale-105">
-              <Mail /> Email Me
-            </a>
+            <form ref={formRef} onSubmit={handleEmailSend} className="space-y-5">
+              <div className="grid gap-4 sm:grid-cols-2">
+                <input
+                  type="text"
+                  name="user_name"
+                  placeholder="Your name"
+                  required
+                  className="w-full rounded-2xl border border-white/10 bg-slate-950/80 px-4 py-3 text-sm text-white outline-none transition focus:border-accent/60"
+                />
+                <input
+                  type="email"
+                  name="user_email"
+                  placeholder="Your email"
+                  required
+                  className="w-full rounded-2xl border border-white/10 bg-slate-950/80 px-4 py-3 text-sm text-white outline-none transition focus:border-accent/60"
+                />
+              </div>
+              <input
+                type="text"
+                name="subject"
+                placeholder="Subject"
+                required
+                className="w-full rounded-2xl border border-white/10 bg-slate-950/80 px-4 py-3 text-sm text-white outline-none transition focus:border-accent/60"
+              />
+              <textarea
+                name="message"
+                placeholder="Your message"
+                rows="5"
+                required
+                className="w-full rounded-2xl border border-white/10 bg-slate-950/80 px-4 py-3 text-sm text-white outline-none transition focus:border-accent/60"
+              />
+              <button
+                type="submit"
+                disabled={sending}
+                className="inline-flex w-full items-center justify-center rounded-full bg-accent px-6 py-3 text-sm font-semibold text-slate-950 transition hover:scale-105 disabled:opacity-60"
+              >
+                {sending ? 'Sending...' : 'Send Message'}
+              </button>
+              {statusMessage && <p className="text-sm text-slate-300">{statusMessage}</p>}
+            </form>
           </GlassCard>
 
           <GlassCard className="space-y-6 px-8 py-10">
             <div className="space-y-4">
               <div className="flex items-center gap-3 text-slate-200">
                 <span className="inline-flex h-3 w-3 rounded-full bg-accent" />
-                <span>maawazali111@gmail.com</span>
+                <span>Kahuta, Rawalpindi, Pakistan</span>
+              </div>
+              <div className="flex items-center gap-3 text-slate-200">
+                <span className="inline-flex h-3 w-3 rounded-full bg-accent" />
+                <span>maawaz.vercel.app</span>
               </div>
               <div className="flex items-center gap-3 text-slate-200">
                 <span className="inline-flex h-3 w-3 rounded-full bg-accent" />
