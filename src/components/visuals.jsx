@@ -55,14 +55,13 @@ export function NeuralSphere() {
     <group>
       <Float speed={3.5} rotationIntensity={1.6} floatIntensity={0.9}>
         <group>
-          <Sphere args={[1.12, 120, 120]} scale={1.6}>
-            <MeshDistortMaterial
+          <Sphere args={[1.12, 120, 120]} scale={1.4}>
+            <meshStandardMaterial
               color="#8b5cf6"
-              attach="material"
-              distort={0.6}
-              speed={1.7}
-              roughness={0.12}
-              metalness={0.88}
+              transparent
+              opacity={0.22}
+              roughness={0.18}
+              metalness={0.92}
               emissive="#7c3aed"
               emissiveIntensity={0.18}
             />
@@ -74,8 +73,8 @@ export function NeuralSphere() {
               <meshStandardMaterial
                 color="#38BDF8"
                 emissive="#38BDF8"
-                emissiveIntensity={0.35}
-                roughness={0.16}
+                emissiveIntensity={0.5}
+                roughness={0.14}
                 metalness={0.8}
               />
             </mesh>

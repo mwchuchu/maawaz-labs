@@ -86,7 +86,7 @@ export default function App() {
               className="space-y-6"
             >
               <h1 className="text-5xl md:text-6xl lg:text-7xl font-semibold leading-tight tracking-tight text-white">
-                I build intelligent AI products with compelling user experiences.
+                Muhammad Maawaz <br></br>I build intelligent AI products with compelling user experiences.
               </h1>
               <p className="max-w-2xl text-lg text-slate-300 sm:text-xl">
                 I help companies turn data into intelligent systems using NLP, RAG, and scalable ML architectures.
@@ -113,27 +113,19 @@ export default function App() {
             </div>
           </div>
 
-          <motion.div
-            initial={{ opacity: 0, scale: 0.92 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.8, delay: 0.15 }}
-            className="relative mx-auto w-full overflow-hidden rounded-[2.5rem] border border-white/10 bg-slate-950/40 shadow-[0_50px_140px_-70px_rgba(56,189,248,0.55)]"
-          >
-            <div className="absolute inset-x-6 top-6 h-1 rounded-full bg-gradient-to-r from-cyan-400 via-fuchsia-500 to-sky-400 opacity-90 blur-sm" />
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(56,189,248,0.08),transparent_35%)]" />
-            <div className="absolute inset-y-0 right-0 w-16 bg-gradient-to-l from-white/10 to-transparent" />
+          <div className="relative mx-auto w-full overflow-hidden rounded-[2.5rem] shadow-[0_50px_120px_-70px_rgba(56,189,248,0.45)] bg-transparent">
             <div className="aspect-[4/5] min-h-[420px]">
-              <Canvas camera={{ position: [0, 0, 2.4] }}>
-                <ambientLight intensity={0.55} />
-                <directionalLight position={[2, 2, 2]} intensity={1} />
-                <pointLight position={[-4, 1.5, 5]} intensity={1.2} color="#A855F7" />
-                <pointLight position={[4, -2, 3]} intensity={0.9} color="#38BDF8" />
+              <Canvas camera={{ position: [0, 0, 2.6], fov: 35 }} className="h-full w-full">
+                <ambientLight intensity={0.65} />
+                <directionalLight position={[2, 2, 2]} intensity={1.1} />
+                <pointLight position={[-3, 1.5, 5]} intensity={1.2} color="#A855F7" />
+                <pointLight position={[3.5, -2, 4]} intensity={0.9} color="#38BDF8" />
                 <Suspense fallback={null}>
                   <NeuralSphere />
                 </Suspense>
               </Canvas>
             </div>
-          </motion.div>
+          </div>
         </div>
       </SectionWrapper>
 
