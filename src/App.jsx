@@ -2,8 +2,8 @@
 import { Canvas } from '@react-three/fiber';
 import { motion } from 'framer-motion';
 import emailjs from '@emailjs/browser';
-import { Mail, ExternalLink, Cpu, Database, Code, Brain } from 'lucide-react';
-import { ParticleBackground, NeuralSphere } from './components/visuals';
+import { Mail, ExternalLink, Link2, GitBranch, Cpu, Database, Code, Brain } from 'lucide-react';
+import { NeuralSphere } from './components/visuals';
 
 const SectionWrapper = ({ children, id, className = '' }) => (
   <section id={id} className={`relative py-20 px-6 md:px-10 lg:px-20 ${className}`}>
@@ -17,14 +17,14 @@ const SectionTitle = ({ number, title }) => (
       <span className="inline-flex h-1.5 w-16 rounded-full bg-accent" />
       <span className="text-accent font-mono text-sm tracking-[0.4em]">{number}</span>
     </div>
-    <h2 className="text-3xl md:text-4xl font-semibold text-white">{title}</h2>
+    <h2 className="text-3xl md:text-4xl font-semibold text-text">{title}</h2>
   </div>
 );
 
 const GlassCard = ({ children, className = '' }) => (
   <motion.div
     whileHover={{ y: -6 }}
-    className={`relative overflow-hidden rounded-[2rem] border border-white/10 bg-slate-950/60 p-8 shadow-[0_40px_120px_-60px_rgba(15,23,42,0.95)] backdrop-blur-xl transition-all duration-300 ${className}`}>
+    className={`relative overflow-hidden rounded-[2rem] border border-[rgba(241,231,205,0.14)] bg-slate-950/60 p-10 shadow-[0_40px_120px_-60px_rgba(15,23,42,0.95)] backdrop-blur-xl transition-all duration-300 ${className}`}>
     <div className="absolute inset-0 bg-gradient-to-br from-white/5 via-transparent to-white/5 opacity-50" />
     <div className="relative">{children}</div>
   </motion.div>
@@ -152,75 +152,60 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen overflow-hidden bg-[radial-gradient(circle_at_top_left,_rgba(56,189,248,0.16),_transparent_25%),radial-gradient(circle_at_bottom_right,_rgba(168,85,247,0.16),_transparent_18%),linear-gradient(180deg,_#020617_0%,_#0f172a_100%)] text-text selection:bg-accent/30">
+    <div className="min-h-screen overflow-hidden bg-[radial-gradient(circle_at_top_left,_rgba(127,191,62,0.18),_transparent_25%),radial-gradient(circle_at_bottom_right,_rgba(241,231,205,0.18),_transparent_18%),linear-gradient(180deg,_#081f14_0%,_#173624_100%)] text-text selection:bg-accent/30">
       <div className="fixed inset-0 z-0 pointer-events-none">
-        <Canvas camera={{ position: [0, 0, 1] }}>
+        <Canvas camera={{ position: [0, 0, 3], fov: 50 }}>
+          <ambientLight intensity={0.6} />
+          <directionalLight position={[2, 2, 2]} intensity={0.9} />
           <Suspense fallback={null}>
-            <ParticleBackground />
+            <NeuralSphere />
           </Suspense>
         </Canvas>
       </div>
 
       <SectionWrapper id="home" className="pt-28">
-        <div className="grid gap-10 lg:grid-cols-[1.1fr_0.9fr] items-center">
+        <div className="grid gap-10 lg:grid-cols-1 items-center">
           <div className="space-y-8">
-            <motion.div
-              initial={{ opacity: 0, y: 24 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, ease: 'easeOut' }}
-              className="inline-flex items-center gap-3 rounded-full border border-accent/30 bg-slate-950/70 px-4 py-2 text-sm text-accent shadow-[0_15px_50px_-30px_rgba(56,189,248,0.85)]"
-            >
-              AI | Machine Learning | NLP | LLMs | RAG | Transformers | FAISS
-            </motion.div>
-
             <motion.div
               initial={{ opacity: 0, x: -40 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8, delay: 0.1 }}
-              className="space-y-6"
+              className="space-y-12"
             >
-              <h1 className="text-5xl md:text-6xl lg:text-7xl font-semibold leading-tight tracking-tight text-white">
+              <h1 className="text-5xl md:text-6xl lg:text-7xl font-semibold leading-tight tracking-tight text-text">
                 Muhammad Maawaz
                 <br />AI, Machine Learning & NLP Engineer
               </h1>
-              <p className="max-w-2xl text-lg text-slate-300 sm:text-xl">
-                Computer Science graduate specialized in Machine Learning, Artificial Intelligence, and Natural Language Processing.
+              <p className="max-w-2xl text-lg text-[#d7c8a3] sm:text-xl leading-relaxed">
+                Get your AI projects done today.<br></br>
                 Experienced in building end-to-end AI systems including RAG pipelines, vector search, intelligent chatbots, and production-ready backend APIs.
               </p>
 
-              <div className="flex flex-col gap-4 sm:flex-row">
+              <div className="flex flex-col gap-5 sm:flex-row">
                 <a href="#projects" className="inline-flex items-center justify-center rounded-full bg-accent px-8 py-3 text-sm font-semibold text-slate-950 transition hover:scale-105">
                   View Projects
                 </a>
-                <a href="/Muhammad_Maawaz_CV.pdf" download className="inline-flex items-center justify-center rounded-full border border-accent/40 bg-white/5 px-8 py-3 text-sm font-semibold text-slate-100 transition hover:border-accent hover:bg-accent/10">
-                  Download CV
-                </a>
+                <button
+                  type="button"
+                  onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
+                  className="inline-flex items-center justify-center rounded-full border border-accent/40 bg-[rgba(241,231,205,0.08)] px-8 py-3 text-sm font-semibold text-slate-100 transition hover:border-accent hover:bg-accent/10"
+                >
+                  Hire Me
+                </button>
               </div>
             </motion.div>
 
-            <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
+            <div className="grid grid-cols-2 gap-6 sm:grid-cols-4">
               {['5+ Projects', '2 Internships', '90%+ Accuracy', 'CS Graduate'].map((item, idx) => (
-                <div key={idx} className="rounded-3xl border border-white/10 bg-slate-950/70 px-4 py-5 text-center shadow-xl shadow-slate-950/30 backdrop-blur-xl">
-                  <p className="text-lg font-semibold text-white">{item.split(' ')[0]}</p>
-                  <p className="mt-1 text-sm uppercase tracking-[0.24em] text-slate-400">{item.replace(/^[^ ]+ /, '')}</p>
+                <div key={idx} className="rounded-3xl border border-[rgba(241,231,205,0.14)] bg-slate-950/70 px-4 py-5 text-center shadow-xl shadow-slate-950/30 backdrop-blur-xl">
+                  <p className="text-lg font-semibold text-text">{item.split(' ')[0]}</p>
+                  <p className="mt-1 text-sm uppercase tracking-[0.24em] text-[#b8a983]">{item.replace(/^[^ ]+ /, '')}</p>
                 </div>
               ))}
             </div>
           </div>
 
-          <div className="relative mx-auto w-full overflow-hidden rounded-[2.5rem] shadow-[0_50px_120px_-70px_rgba(56,189,248,0.45)] bg-transparent">
-            <div className="aspect-[4/5] min-h-[420px]">
-              <Canvas camera={{ position: [0, 0, 2.6], fov: 35 }} className="h-full w-full">
-                <ambientLight intensity={0.65} />
-                <directionalLight position={[2, 2, 2]} intensity={1.1} />
-                <pointLight position={[-3, 1.5, 5]} intensity={1.2} color="#A855F7" />
-                <pointLight position={[3.5, -2, 4]} intensity={0.9} color="#38BDF8" />
-                <Suspense fallback={null}>
-                  <NeuralSphere />
-                </Suspense>
-              </Canvas>
-            </div>
-          </div>
+          
         </div>
       </SectionWrapper>
 
@@ -228,22 +213,24 @@ export default function App() {
         <SectionTitle number="01." title="About Me" />
         <div className="grid gap-8 lg:grid-cols-[1.3fr_0.9fr]">
           <GlassCard className="space-y-6">
-            <p className="text-slate-300 leading-relaxed">
-              I am a Computer Science graduate focused on AI-driven products and engineering.
-              I specialize in end-to-end solutions for NLP, Retrieval-Augmented Generation, and ML infrastructure.
+            <p className="text-[#d7c8a3] leading-relaxed">
+              <br></br>I specialize in end-to-end solutions for NLP, Retrieval-Augmented Generation, and ML infrastructure.
             </p>
-            <p className="text-slate-300 leading-relaxed">
+            <p className="text-[#d7c8a3] leading-relaxed">
               My work brings research-grade models into production, with a strong emphasis on clean interfaces,
               fast performance, and measurable business impact.
             </p>
           </GlassCard>
           <div className="grid gap-4 sm:grid-cols-2">
             {['RAG Systems', 'Production APIs', 'Semantic Search', 'AI Automations'].map((label, idx) => (
-              <div key={idx} className="rounded-[1.75rem] border border-white/10 bg-slate-950/70 p-6 text-center shadow-[0_25px_60px_-40px_rgba(15,23,42,0.8)]">
-                <p className="text-lg font-semibold text-white">{label}</p>
-                <p className="mt-2 text-sm text-slate-400">Handcrafted systems built for modern workflows.</p>
+              <div key={idx} className="rounded-[1.75rem] border border-[rgba(241,231,205,0.14)] bg-slate-950/70 p-6 text-center shadow-[0_25px_60px_-40px_rgba(15,23,42,0.8)]">
+                <p className="text-lg font-semibold text-text">{label}</p>
+                <p className="mt-2 text-sm text-[#b8a983]">Handcrafted systems built for modern workflows.</p>
+                
               </div>
-            ))}
+              
+            ))
+            }
           </div>
         </div>
       </SectionWrapper>
@@ -252,16 +239,16 @@ export default function App() {
         <SectionTitle number="02." title="Experience" />
         <div className="grid gap-6">
           {experience.map((item, idx) => (
-            <GlassCard key={idx} className="space-y-4">
-              <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+            <GlassCard key={idx} className="space-y-6">
+              <div className="flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between">
                 <div>
-                  <h3 className="text-2xl font-semibold text-white">{item.role}</h3>
-                  <p className="text-sm text-slate-400">{item.company}</p>
+                  <h3 className="text-2xl font-semibold text-text">{item.role}</h3>
+                  <p className="text-sm text-[#b8a983]">{item.company}</p>
                 </div>
-                <span className="rounded-full border border-accent/20 bg-white/5 px-4 py-2 text-sm text-slate-200">{item.period}</span>
+                <span className="rounded-full border border-accent/20 bg-[rgba(241,231,205,0.08)] px-4 py-2 text-sm text-[#f1e7cd]">{item.period}</span>
               </div>
-              <p className="text-slate-300 leading-relaxed">{item.description}</p>
-              <ul className="list-disc pl-5 space-y-2 text-sm text-slate-300">
+              <p className="text-[#d7c8a3] leading-relaxed">{item.description}</p>
+              <ul className="list-disc pl-5 space-y-2 text-sm text-[#d7c8a3]">
                 {item.highlights.map((highlight) => (
                   <li key={highlight}>{highlight}</li>
                 ))}
@@ -280,11 +267,11 @@ export default function App() {
                 {idx === 0 && <Brain size={22} />}
                 {idx === 1 && <Cpu size={22} />}
                 {idx === 2 && <Database size={22} />}
-                <h3 className="text-xl font-semibold text-white">{category}</h3>
+                <h3 className="text-xl font-semibold text-text">{category}</h3>
               </div>
-              <div className="grid gap-2">
+              <div className="grid gap-3">
                 {items.map(skill => (
-                  <span key={skill} className="rounded-2xl bg-white/5 px-3 py-2 text-sm text-slate-200 shadow-sm shadow-slate-950/10">
+                  <span key={skill} className="rounded-2xl bg-[rgba(241,231,205,0.08)] px-3 py-2 text-sm text-[#f1e7cd] shadow-sm shadow-slate-950/10">
                     {skill}
                   </span>
                 ))}
@@ -301,15 +288,15 @@ export default function App() {
             <GlassCard key={idx} className="group flex flex-col justify-between gap-8 p-8">
               <div className="flex items-center justify-between">
                 <Code className="text-accent" size={30} />
-                <ExternalLink className="text-slate-400 transition group-hover:text-accent" size={20} />
+                <ExternalLink className="text-[#b8a983] transition group-hover:text-accent" size={20} />
               </div>
               <div className="space-y-5">
-                <h3 className="text-2xl font-semibold text-white">{project.title}</h3>
-                <p className="text-sm leading-relaxed text-slate-300">{project.desc}</p>
+                <h3 className="text-2xl font-semibold text-text">{project.title}</h3>
+                <p className="text-sm leading-relaxed text-[#d7c8a3]">{project.desc}</p>
               </div>
               <div className="flex flex-wrap gap-3 pt-4">
                 {project.tech.map(t => (
-                  <span key={t} className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-[11px] uppercase tracking-[0.24em] text-accent">
+                  <span key={t} className="rounded-full border border-[rgba(241,231,205,0.14)] bg-[rgba(241,231,205,0.08)] px-3 py-1 text-[11px] uppercase tracking-[0.24em] text-accent">
                     {t}
                   </span>
                 ))}
@@ -323,10 +310,10 @@ export default function App() {
         <SectionTitle number="05." title="Certifications" />
         <div className="grid gap-4 md:grid-cols-3">
           {certifications.map((cert, idx) => (
-            <GlassCard key={idx} className="space-y-3 p-6 text-slate-300">
-              <h3 className="text-xl font-semibold text-white">{cert.title}</h3>
-              <p className="text-sm text-slate-400">{cert.issuer}</p>
-              <span className="block rounded-full border border-accent/20 bg-white/5 px-3 py-2 text-xs uppercase tracking-[0.24em] text-accent">{cert.year}</span>
+            <GlassCard key={idx} className="space-y-3 p-6 text-[#d7c8a3]">
+              <h3 className="text-xl font-semibold text-text">{cert.title}</h3>
+              <p className="text-sm text-[#b8a983]">{cert.issuer}</p>
+              <span className="block rounded-full border border-accent/20 bg-[rgba(241,231,205,0.08)] px-3 py-2 text-xs uppercase tracking-[0.24em] text-accent">{cert.year}</span>
             </GlassCard>
           ))}
         </div>
@@ -337,9 +324,9 @@ export default function App() {
         <div className="grid gap-6 md:grid-cols-2">
           {education.map((item, idx) => (
             <GlassCard key={idx} className="space-y-3 p-6">
-              <h3 className="text-2xl font-semibold text-white">{item.degree}</h3>
-              <p className="text-slate-400">{item.institution}</p>
-              <span className="inline-flex rounded-full border border-accent/20 bg-white/5 px-3 py-2 text-xs uppercase tracking-[0.24em] text-accent">{item.year}</span>
+              <h3 className="text-2xl font-semibold text-text">{item.degree}</h3>
+              <p className="text-[#b8a983]">{item.institution}</p>
+              <span className="inline-flex rounded-full border border-accent/20 bg-[rgba(241,231,205,0.08)] px-3 py-2 text-xs uppercase tracking-[0.24em] text-accent">{item.year}</span>
             </GlassCard>
           ))}
         </div>
@@ -350,7 +337,7 @@ export default function App() {
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {interests.map((interest, idx) => (
             <GlassCard key={idx} className="p-5">
-              <p className="text-slate-200">{interest}</p>
+              <p className="text-[#f1e7cd]">{interest}</p>
             </GlassCard>
           ))}
         </div>
@@ -360,7 +347,7 @@ export default function App() {
         <SectionTitle number="08." title="Get In Touch" />
         <div className="grid gap-8 lg:grid-cols-[1.2fr_0.8fr]">
           <GlassCard className="space-y-6 px-8 py-10">
-            <p className="text-slate-300 leading-relaxed">
+            <p className="text-[#d7c8a3] leading-relaxed">
               I'm actively looking for new opportunities in AI/ML Engineering. Send a message below and I'll reply as soon as possible.
             </p>
             <form ref={formRef} onSubmit={handleEmailSend} className="space-y-5">
@@ -370,14 +357,14 @@ export default function App() {
                   name="user_name"
                   placeholder="Your name"
                   required
-                  className="w-full rounded-2xl border border-white/10 bg-slate-950/80 px-4 py-3 text-sm text-white outline-none transition focus:border-accent/60"
+                  className="w-full rounded-2xl border border-[rgba(241,231,205,0.14)] bg-slate-950/80 px-4 py-3 text-sm text-text outline-none transition focus:border-accent/60"
                 />
                 <input
                   type="email"
                   name="user_email"
                   placeholder="Your email"
                   required
-                  className="w-full rounded-2xl border border-white/10 bg-slate-950/80 px-4 py-3 text-sm text-white outline-none transition focus:border-accent/60"
+                  className="w-full rounded-2xl border border-[rgba(241,231,205,0.14)] bg-slate-950/80 px-4 py-3 text-sm text-text outline-none transition focus:border-accent/60"
                 />
               </div>
               <input
@@ -385,14 +372,14 @@ export default function App() {
                 name="subject"
                 placeholder="Subject"
                 required
-                className="w-full rounded-2xl border border-white/10 bg-slate-950/80 px-4 py-3 text-sm text-white outline-none transition focus:border-accent/60"
+                className="w-full rounded-2xl border border-[rgba(241,231,205,0.14)] bg-slate-950/80 px-4 py-3 text-sm text-text outline-none transition focus:border-accent/60"
               />
               <textarea
                 name="message"
                 placeholder="Your message"
                 rows="5"
                 required
-                className="w-full rounded-2xl border border-white/10 bg-slate-950/80 px-4 py-3 text-sm text-white outline-none transition focus:border-accent/60"
+                className="w-full rounded-2xl border border-[rgba(241,231,205,0.14)] bg-slate-950/80 px-4 py-3 text-sm text-text outline-none transition focus:border-accent/60"
               />
               <button
                 type="submit"
@@ -401,39 +388,45 @@ export default function App() {
               >
                 {sending ? 'Sending...' : 'Send Message'}
               </button>
-              {statusMessage && <p className="text-sm text-slate-300">{statusMessage}</p>}
+              {statusMessage && <p className="text-sm text-[#d7c8a3]">{statusMessage}</p>}
             </form>
           </GlassCard>
 
           <GlassCard className="space-y-6 px-8 py-10">
             <div className="space-y-4">
-              <div className="flex items-center gap-3 text-slate-200">
+              <div className="flex items-center gap-3 text-[#f1e7cd]">
                 <span className="inline-flex h-3 w-3 rounded-full bg-accent" />
-                <span>Kahuta, Rawalpindi, Pakistan</span>
+                <span>Rawalpindi, Pakistan</span>
               </div>
-              <div className="flex items-center gap-3 text-slate-200">
-                <span className="inline-flex h-3 w-3 rounded-full bg-accent" />
-                <span>maawaz.vercel.app</span>
-              </div>
-              <div className="flex items-center gap-3 text-slate-200">
+              <div className="flex items-center gap-3 text-[#f1e7cd]">
                 <span className="inline-flex h-3 w-3 rounded-full bg-accent" />
                 <span>+92 346 5120975</span>
               </div>
             </div>
-            <div className="flex flex-wrap gap-4 pt-4 text-slate-300">
-              <a href="https://github.com/mwchuchu" target="_blank" rel="noreferrer" className="rounded-2xl border border-white/10 bg-white/5 px-4 py-3 transition hover:border-accent/50 hover:text-accent">
+            <div className="flex flex-wrap gap-4 pt-4 text-[#d7c8a3]">
+              <a href="https://github.com/mwchuchu" target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-2xl border border-[rgba(241,231,205,0.14)] bg-[rgba(241,231,205,0.08)] px-4 py-3 transition hover:border-accent/50 hover:text-accent">
+                <GitBranch size={18} />
                 GitHub
               </a>
-              <a href="https://linkedin.com/in/maawaz" target="_blank" rel="noreferrer" className="rounded-2xl border border-white/10 bg-white/5 px-4 py-3 transition hover:border-accent/50 hover:text-accent">
+              <a href="https://linkedin.com/in/maawaz" target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-2xl border border-[rgba(241,231,205,0.14)] bg-[rgba(241,231,205,0.08)] px-4 py-3 transition hover:border-accent/50 hover:text-accent">
+                <Link2 size={18} />
                 LinkedIn
+              </a>
+              <a href="mailto:hello@maawaz.vercel.app" className="inline-flex items-center gap-2 rounded-2xl border border-[rgba(241,231,205,0.14)] bg-[rgba(241,231,205,0.08)] px-4 py-3 transition hover:border-accent/50 hover:text-accent">
+                <Mail size={18} />
+                Email
+              </a>
+              <a href="https://maawaz.vercel.app" target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-2xl border border-[rgba(241,231,205,0.14)] bg-[rgba(241,231,205,0.08)] px-4 py-3 transition hover:border-accent/50 hover:text-accent">
+                <ExternalLink size={18} />
+                Website
               </a>
             </div>
           </GlassCard>
         </div>
       </SectionWrapper>
 
-      <footer className="border-t border-white/10 py-8 text-center text-sm text-slate-500">
-        © 2025 Muhammad Maawaz. Built with React, Three.js & Framer Motion.
+      <footer className="border-t border-[rgba(241,231,205,0.14)] py-8 text-center text-sm text-[#b8a981]">
+        © 2026 Muhammad Maawaz. Built with React, Three.js & Framer Motion.
       </footer>
     </div>
   );

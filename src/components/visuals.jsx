@@ -1,25 +1,6 @@
 import { useRef, useMemo } from "react";
-import { Canvas, useFrame } from "@react-three/fiber";
-import { Points, PointMaterial, Sphere, Float, MeshDistortMaterial, Line } from "@react-three/drei";
-import * as random from "maath/random/dist/maath-random.esm";
-
-export function ParticleBackground() {
-  const ref = useRef();
-  const sphere = random.inSphere(new Float32Array(5000), { radius: 1.5 });
-
-  useFrame((state, delta) => {
-    ref.current.rotation.x -= delta / 10;
-    ref.current.rotation.y -= delta / 15;
-  });
-
-  return (
-    <group rotation={[0, 0, Math.PI / 4]}>
-      <Points ref={ref} positions={sphere} stride={3} frustumCulled={false}>
-        <PointMaterial transparent color="#38BDF8" size={0.002} sizeAttenuation={true} depthWrite={false} />
-      </Points>
-    </group>
-  );
-}
+import { useFrame } from "@react-three/fiber";
+import { Float, Line } from "@react-three/drei";
 
 export function NeuralSphere() {
   const brainNodes = useMemo(
@@ -55,24 +36,12 @@ export function NeuralSphere() {
     <group>
       <Float speed={3.5} rotationIntensity={1.6} floatIntensity={0.9}>
         <group>
-          <Sphere args={[1.12, 120, 120]} scale={1.4}>
-            <meshStandardMaterial
-              color="#8b5cf6"
-              transparent
-              opacity={0.22}
-              roughness={0.18}
-              metalness={0.92}
-              emissive="#7c3aed"
-              emissiveIntensity={0.18}
-            />
-          </Sphere>
-
           {brainNodes.map((node, index) => (
             <mesh key={index} position={node}>
               <sphereGeometry args={[0.08, 20, 20]} />
               <meshStandardMaterial
-                color="#38BDF8"
-                emissive="#38BDF8"
+                color="#7ebc82"
+                emissive="#7ebc82"
                 emissiveIntensity={0.5}
                 roughness={0.14}
                 metalness={0.8}
@@ -86,7 +55,7 @@ export function NeuralSphere() {
         <Line
           key={idx}
           points={points}
-          color="#60a5fa"
+          color="#b8c39a"
           lineWidth={1}
           transparent
           opacity={0.25}
@@ -106,8 +75,8 @@ export function NeuralSphere() {
           <mesh key={`pulse-${idx}`} position={position}>
             <sphereGeometry args={[0.045, 12, 12]} />
             <meshStandardMaterial
-              color="#f472b6"
-              emissive="#f472b6"
+              color="#f1e7cd"
+              emissive="#f1e7cd"
               emissiveIntensity={0.8}
               roughness={0.1}
               metalness={0.3}
