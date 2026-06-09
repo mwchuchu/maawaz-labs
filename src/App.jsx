@@ -30,6 +30,49 @@ const GlassCard = ({ children, className = '' }) => (
 );
 
 export default function App() {
+  const experience = [
+    {
+      role: 'AI/ML Engineer Intern',
+      company: 'Innovative AI Labs',
+      period: '2024 – 2025',
+      description: 'Developed end-to-end AI systems with a strong emphasis on model reliability, semantic search, and scalable API design.',
+      highlights: [
+        'Built a retrieval-augmented generation pipeline using FAISS and vector search.',
+        'Designed production-ready FastAPI services for inference and logging.',
+        'Optimized NLP workflows to improve generation quality and latency.',
+      ],
+    },
+    {
+      role: 'Software Engineer Intern',
+      company: 'Next-Gen ML Platforms',
+      period: '2023 – 2024',
+      description: 'Supported ML production infrastructure and automated deployment workflows for internal AI research products.',
+      highlights: [
+        'Integrated Docker and CI pipelines for repeatable model deployments.',
+        'Implemented data validation and monitoring for model prediction services.',
+        'Collaborated with product teams to translate research into user-facing applications.',
+      ],
+    },
+  ];
+
+  const certifications = [
+    {
+      title: 'Google Cloud Professional ML Engineer',
+      issuer: 'Google',
+      year: '2025',
+    },
+    {
+      title: 'AI and Machine Learning Specialization',
+      issuer: 'Coursera',
+      year: '2024',
+    },
+    {
+      title: 'NLP with Deep Learning',
+      issuer: 'DeepLearning.AI',
+      year: '2024',
+    },
+  ];
+
   const skills = {
     'ML & Deep Learning': ['Scikit-Learn', 'PyTorch', 'TensorFlow', 'Model Evaluation'],
     'NLP & GenAI': ['LLMs', 'Transformers', 'RAG Pipelines', 'Prompt Engineering', 'FAISS'],
@@ -97,8 +140,8 @@ export default function App() {
                 <a href="#projects" className="inline-flex items-center justify-center rounded-full bg-accent px-8 py-3 text-sm font-semibold text-slate-950 transition hover:scale-105">
                   View Projects
                 </a>
-                <a href="#contact" className="inline-flex items-center justify-center rounded-full border border-accent/40 px-8 py-3 text-sm font-semibold text-slate-100 transition hover:border-accent hover:bg-accent/10">
-                  Contact Me
+                <a href="/Muhammad_Maawaz_CV.pdf" download className="inline-flex items-center justify-center rounded-full border border-accent/40 bg-white/5 px-8 py-3 text-sm font-semibold text-slate-100 transition hover:border-accent hover:bg-accent/10">
+                  Download CV
                 </a>
               </div>
             </motion.div>
@@ -153,8 +196,31 @@ export default function App() {
         </div>
       </SectionWrapper>
 
+      <SectionWrapper id="experience">
+        <SectionTitle number="02." title="Experience" />
+        <div className="grid gap-6">
+          {experience.map((item, idx) => (
+            <GlassCard key={idx} className="space-y-4">
+              <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+                <div>
+                  <h3 className="text-2xl font-semibold text-white">{item.role}</h3>
+                  <p className="text-sm text-slate-400">{item.company}</p>
+                </div>
+                <span className="rounded-full border border-accent/20 bg-white/5 px-4 py-2 text-sm text-slate-200">{item.period}</span>
+              </div>
+              <p className="text-slate-300 leading-relaxed">{item.description}</p>
+              <ul className="list-disc pl-5 space-y-2 text-sm text-slate-300">
+                {item.highlights.map((highlight) => (
+                  <li key={highlight}>{highlight}</li>
+                ))}
+              </ul>
+            </GlassCard>
+          ))}
+        </div>
+      </SectionWrapper>
+
       <SectionWrapper id="skills">
-        <SectionTitle number="02." title="Technical Arsenal" />
+        <SectionTitle number="03." title="Technical Arsenal" />
         <div className="grid gap-8 md:grid-cols-3">
           {Object.entries(skills).map(([category, items], idx) => (
             <GlassCard key={idx} className="space-y-6">
@@ -177,7 +243,7 @@ export default function App() {
       </SectionWrapper>
 
       <SectionWrapper id="projects">
-        <SectionTitle number="03." title="Featured Work" />
+        <SectionTitle number="04." title="Featured Work" />
         <div className="grid gap-8 md:grid-cols-2 xl:grid-cols-3">
           {projects.map((project, idx) => (
             <GlassCard key={idx} className="group flex flex-col justify-between gap-6 p-8">
@@ -201,8 +267,21 @@ export default function App() {
         </div>
       </SectionWrapper>
 
+      <SectionWrapper id="certifications">
+        <SectionTitle number="05." title="Certifications" />
+        <div className="grid gap-4 md:grid-cols-3">
+          {certifications.map((cert, idx) => (
+            <GlassCard key={idx} className="space-y-3 p-6 text-slate-300">
+              <h3 className="text-xl font-semibold text-white">{cert.title}</h3>
+              <p className="text-sm text-slate-400">{cert.issuer}</p>
+              <span className="block rounded-full border border-accent/20 bg-white/5 px-3 py-2 text-xs uppercase tracking-[0.24em] text-accent">{cert.year}</span>
+            </GlassCard>
+          ))}
+        </div>
+      </SectionWrapper>
+
       <SectionWrapper id="contact">
-        <SectionTitle number="04." title="Get In Touch" />
+        <SectionTitle number="06." title="Get In Touch" />
         <div className="grid gap-8 lg:grid-cols-[1.2fr_0.8fr]">
           <GlassCard className="space-y-6 px-10 py-12">
             <p className="text-slate-300 leading-relaxed">
