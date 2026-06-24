@@ -65,6 +65,11 @@ export default function App() {
     { title: 'Certified AI Engineering Master Class', issuer: 'Udemy', year: '2025' },
     { title: 'TensorFlow Master Class', issuer: 'Udemy', year: '2025' },
     { title: 'Azure DevOps', issuer: 'Udemy', year: '2025' },
+    { title: 'Claude 101', issuer: 'Anthropic', year: '2026' },
+    { title: 'Introduction to MCP', issuer: 'Anthropic', year: '2026' },
+    { title: 'AI Fluency', issuer: 'Anthropic', year: '2026' },
+    { title: 'Google AI Essentials', issuer: 'Coursera', year: '2026' },
+    { title: 'Prompt Engineering', issuer: 'Coursera', year: '2026' },
   ];
 
   const education = [
@@ -215,7 +220,7 @@ export default function App() {
             </motion.div>
 
             <div className="grid grid-cols-2 gap-6 sm:grid-cols-4">
-              {['5+ Projects', '2 Internships', '90%+ Accuracy', 'CS Graduate'].map((item, idx) => (
+              {['50+ Projects', '3 Internships', '90%+ Accuracy', 'CS Graduate'].map((item, idx) => (
                 <div key={idx} className="rounded-3xl border border-[rgba(241,231,205,0.14)] bg-slate-950/70 px-4 py-5 text-center shadow-xl shadow-slate-950/30 backdrop-blur-xl">
                   <p className="text-lg font-semibold text-text">{item.split(' ')[0]}</p>
                   <p className="mt-1 text-sm uppercase tracking-[0.24em] text-[#b8a983]">{item.replace(/^[^ ]+ /, '')}</p>
@@ -379,7 +384,7 @@ export default function App() {
         <div className="grid gap-8 lg:grid-cols-[1.2fr_0.8fr]">
           <GlassCard className="space-y-6 px-8 py-10">
             <p className="text-[#d7c8a3] leading-relaxed">
-              I'm actively looking for new opportunities in AI/ML Engineering. Send a message below and I'll reply as soon as possible.
+              Send a message and enter the creative world of AI, Machine Learning, and NLP. I am open to freelance projects, collaborations, and full-time opportunities.
             </p>
             <form ref={formRef} onSubmit={handleEmailSend} className="space-y-5">
               <div className="grid gap-4 sm:grid-cols-2">
