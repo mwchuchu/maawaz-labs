@@ -59,17 +59,17 @@ export default function App() {
   ];
 
   const certifications = [
-    { title: 'Machine Learning with Python', issuer: 'freeCodeCamp', year: '2025' },
-    { title: 'Full Stack AI Engineer', issuer: 'Udemy', year: '2025' },
-    { title: 'Mastering PyTorch', issuer: 'Udemy', year: '2025' },
-    { title: 'Certified AI Engineering Master Class', issuer: 'Udemy', year: '2025' },
-    { title: 'TensorFlow Master Class', issuer: 'Udemy', year: '2025' },
-    { title: 'Azure DevOps', issuer: 'Udemy', year: '2025' },
-    { title: 'Claude 101', issuer: 'Anthropic', year: '2026' },
-    { title: 'Introduction to MCP', issuer: 'Anthropic', year: '2026' },
-    { title: 'AI Fluency', issuer: 'Anthropic', year: '2026' },
-    { title: 'Google AI Essentials', issuer: 'Coursera', year: '2026' },
-    { title: 'Prompt Engineering', issuer: 'Coursera', year: '2026' },
+    { title: 'Machine Learning with Python', issuer: 'freeCodeCamp', year: '2025', image: '/certifications/freecodecamp.png' },
+    { title: 'Full Stack AI Engineer', issuer: 'Udemy', year: '2025', image: '/certifications/udemy.png' },
+    { title: 'Mastering PyTorch', issuer: 'Udemy', year: '2025', image: '/certifications/udemy.png' },
+    { title: 'Certified AI Engineering Master Class', issuer: 'Udemy', year: '2025', image: '/certifications/udemy.png' },
+    { title: 'TensorFlow Master Class', issuer: 'Udemy', year: '2025', image: '/certifications/udemy.png' },
+    { title: 'Azure DevOps', issuer: 'Udemy', year: '2025', image: '/certifications/udemy.png' },
+    { title: 'Claude 101', issuer: 'Anthropic', year: '2026', image: '/certifications/Claude 101.png' },
+    { title: 'Introduction to MCP', issuer: 'Anthropic', year: '2026', image: '/certifications/anthropic.png' },
+    { title: 'AI Fluency', issuer: 'Anthropic', year: '2026', image: '/certifications/AI-fluency certificate.png' },
+    { title: 'Google AI Essentials', issuer: 'Coursera', year: '2026', image: '/certifications/Google AI essentails.png' },
+    { title: 'Prompt Engineering', issuer: 'Coursera', year: '2026', image: '/certifications/coursera.png' },
   ];
 
   const education = [
@@ -344,12 +344,17 @@ export default function App() {
 
       <SectionWrapper id="certifications">
         <SectionTitle number="05." title="Certifications" />
-        <div className="grid gap-4 md:grid-cols-3">
+        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           {certifications.map((cert, idx) => (
-            <GlassCard key={idx} className="space-y-3 p-6 text-[#d7c8a3]">
-              <h3 className="text-xl font-semibold text-text">{cert.title}</h3>
-              <p className="text-sm text-[#b8a983]">{cert.issuer}</p>
-              <span className="block rounded-full border border-accent/20 bg-[rgba(241,231,205,0.08)] px-3 py-2 text-xs uppercase tracking-[0.24em] text-accent">{cert.year}</span>
+            <GlassCard key={idx} className="flex flex-col gap-4 p-6 text-[#d7c8a3]">
+              {cert.image && (
+                <img src={cert.image} alt={`${cert.issuer} logo`} className="h-16 w-16 rounded-lg object-cover" />
+              )}
+              <div className="space-y-2">
+                <h3 className="text-xl font-semibold text-text">{cert.title}</h3>
+                <p className="text-sm text-[#b8a983]">{cert.issuer}</p>
+                <span className="block rounded-full border border-accent/20 bg-[rgba(241,231,205,0.08)] px-3 py-2 text-xs uppercase tracking-[0.24em] text-accent">{cert.year}</span>
+              </div>
             </GlassCard>
           ))}
         </div>
