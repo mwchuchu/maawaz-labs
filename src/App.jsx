@@ -88,6 +88,25 @@ export default function App() {
     'Intelligent EdTech Platforms',
   ];
 
+  const technologies = [
+    { name: 'Python', logo: '/tech-logos/python.png' },
+    { name: 'JavaScript', logo: '/tech-logos/javascript.png' },
+    { name: 'C++', logo: '/tech-logos/cpp.png' },
+    { name: 'SQL', logo: '/tech-logos/sql.png' },
+    { name: 'Git', logo: '/tech-logos/git.png' },
+    { name: 'GitHub', logo: '/tech-logos/github.png' },
+    { name: 'Docker', logo: '/tech-logos/docker.png' },
+    { name: 'PyTorch', logo: '/tech-logos/pytorch.png' },
+    { name: 'TensorFlow', logo: '/tech-logos/tensorflow.png' },
+    { name: 'React', logo: '/tech-logos/react.png' },
+    { name: 'FastAPI', logo: '/tech-logos/fastapi.png' },
+    { name: 'MongoDB', logo: '/tech-logos/mongodb.png' },
+    { name: 'VS Code', logo: '/tech-logos/vscode.png' },
+    { name: 'Pandas', logo: '/tech-logos/pandas.png' },
+    { name: 'NumPy', logo: '/tech-logos/numpy.png' },
+    { name: 'FAISS', logo: '/tech-logos/faiss.png' },
+  ];
+
   const skills = {
     'Programming & Tools': ['Python', 'JavaScript', 'C++', 'SQL', 'Git', 'GitHub', 'Docker', 'Pandas', 'NumPy', 'VS Code'],
     'AI & Machine Learning': ['Scikit-learn', 'PyTorch', 'TensorFlow', 'Deep Learning', 'Transfer Learning', 'Computer Vision', 'Predictive Modeling', 'Model Evaluation'],
@@ -284,24 +303,40 @@ export default function App() {
 
       <SectionWrapper id="skills">
         <SectionTitle number="03." title="Technical Arsenal" />
-        <div className="grid gap-8 md:grid-cols-3">
-          {Object.entries(skills).map(([category, items], idx) => (
-            <GlassCard key={idx} className="space-y-6">
-              <div className="flex items-center gap-3 text-accent">
-                {idx === 0 && <Brain size={22} />}
-                {idx === 1 && <Cpu size={22} />}
-                {idx === 2 && <Database size={22} />}
-                <h3 className="text-xl font-semibold text-text">{category}</h3>
+        <style>{`
+          @keyframes scroll-left {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-100%); }
+          }
+          .tech-slider {
+            overflow: hidden;
+            background: linear-gradient(90deg, rgba(15,23,42,0.8) 0%, transparent 10%, transparent 90%, rgba(15,23,42,0.8) 100%);
+            border-radius: 2rem;
+            padding: 2rem 0;
+            border: 1px solid rgba(241,231,205,0.14);
+          }
+          .tech-track {
+            display: flex;
+            gap: 2rem;
+            animation: scroll-left 25s linear infinite;
+            width: max-content;
+            padding: 0 2rem;
+          }
+          .tech-track:hover {
+            animation-play-state: paused;
+          }
+        `}</style>
+        <div className="tech-slider">
+          <div className="tech-track">
+            {[...technologies, ...technologies].map((tech, idx) => (
+              <div key={idx} className="flex flex-col items-center gap-3 flex-shrink-0" style={{ width: '100px' }}>
+                <div className="flex items-center justify-center h-16 w-16 rounded-xl bg-[rgba(241,231,205,0.08)] border border-[rgba(241,231,205,0.14)] shadow-lg hover:scale-110 transition-transform">
+                  <img src={tech.logo} alt={tech.name} className="h-10 w-10 object-contain" />
+                </div>
+                <span className="text-xs text-[#b8a983] text-center font-medium">{tech.name}</span>
               </div>
-              <div className="grid gap-3">
-                {items.map(skill => (
-                  <span key={skill} className="rounded-2xl bg-[rgba(241,231,205,0.08)] px-3 py-2 text-sm text-[#f1e7cd] shadow-sm shadow-slate-950/10">
-                    {skill}
-                  </span>
-                ))}
-              </div>
-            </GlassCard>
-          ))}
+            ))}
+          </div>
         </div>
       </SectionWrapper>
 
