@@ -108,7 +108,7 @@ export default function App() {
       title: 'AI Automation Customer Support Agent',
       desc: 'Built a scalable conversational AI for ticket classification, routing, and context-aware responses.',
       tech: ['FastAPI', 'Gemini APIs', 'Python', 'NLP'],
-      github: '#',
+      github: 'https://github.com/mwchuchu/haseemportfolio',
       live: '#',
     },
     {
