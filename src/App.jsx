@@ -120,6 +120,12 @@ export default function App() {
       tech: ['FastAPI', 'Embeddings', 'Python', 'Vector Search'],
       link: '#',
     },
+     {
+      title: 'Pokemon Classifier (Pytorch)',
+      desc: '',
+      tech: ['FastAPI', 'PyTorch', 'Python', 'HTML/CSS'],
+      link: 'https://github.com/mwchuchu/pokemon-classifier',
+    }
   ];
 
   const formRef = useRef(null);
