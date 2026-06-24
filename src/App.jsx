@@ -59,17 +59,17 @@ export default function App() {
   ];
 
   const certifications = [
-    { title: 'Machine Learning with Python', issuer: 'freeCodeCamp', year: '2025', image: '/certifications/freecodecamp.png' },
-    { title: 'Full Stack AI Engineer', issuer: 'Udemy', year: '2025', image: '/certifications/udemy.png' },
-    { title: 'Mastering PyTorch', issuer: 'Udemy', year: '2025', image: '/certifications/udemy.png' },
-    { title: 'Certified AI Engineering Master Class', issuer: 'Udemy', year: '2025', image: '/certifications/udemy.png' },
-    { title: 'TensorFlow Master Class', issuer: 'Udemy', year: '2025', image: '/certifications/udemy.png' },
-    { title: 'Azure DevOps', issuer: 'Udemy', year: '2025', image: '/certifications/udemy.png' },
-    { title: 'Claude 101', issuer: 'Anthropic', year: '2026', image: '/certifications/anthropic.png' },
-    { title: 'Introduction to MCP', issuer: 'Anthropic', year: '2026', image: '/certifications/anthropic.png' },
-    { title: 'AI Fluency', issuer: 'Anthropic', year: '2026', image: '/certifications/anthropic.png' },
-    { title: 'Google AI Essentials', issuer: 'Coursera', year: '2026', image: '/certifications/coursera.png' },
-    { title: 'Prompt Engineering', issuer: 'Coursera', year: '2026', image: '/certifications/coursera.png' },
+    { title: 'Machine Learning with Python', issuer: 'freeCodeCamp', year: '2025' },
+    { title: 'Full Stack AI Engineer', issuer: 'Udemy', year: '2025' },
+    { title: 'Mastering PyTorch', issuer: 'Udemy', year: '2025' },
+    { title: 'Certified AI Engineering Master Class', issuer: 'Udemy', year: '2025' },
+    { title: 'TensorFlow Master Class', issuer: 'Udemy', year: '2025' },
+    { title: 'Azure DevOps', issuer: 'Udemy', year: '2025' },
+    { title: 'Claude 101', issuer: 'Anthropic', year: '2026' },
+    { title: 'Introduction to MCP', issuer: 'Anthropic', year: '2026' },
+    { title: 'AI Fluency', issuer: 'Anthropic', year: '2026' },
+    { title: 'Google AI Essentials', issuer: 'Coursera', year: '2026' },
+    { title: 'Prompt Engineering', issuer: 'Coursera', year: '2026' },
   ];
 
   const education = [
@@ -246,15 +246,10 @@ export default function App() {
             </p>
           </GlassCard>
           <div className="grid gap-4 sm:grid-cols-2">
-            {[
-              { header: 'Deep Learning', tagline: 'Advanced neural architectures driving AI innovation' },
-              { header: 'Machine Learning', tagline: 'Intelligent algorithms solving complex problems' },
-              { header: 'RAGs', tagline: 'Semantic retrieval powering intelligent search' },
-              { header: 'Full Stack', tagline: 'End-to-end solutions from data to deployment' }
-            ].map((item, idx) => (
+            {['RAG Systems', 'Production APIs', 'Semantic Search', 'AI Automations'].map((label, idx) => (
               <div key={idx} className="rounded-[1.75rem] border border-[rgba(241,231,205,0.14)] bg-slate-950/70 p-6 text-center shadow-[0_25px_60px_-40px_rgba(15,23,42,0.8)]">
-                <p className="text-lg font-semibold text-text">{item.header}</p>
-                <p className="mt-2 text-sm text-[#b8a983]">{item.tagline}</p>
+                <p className="text-lg font-semibold text-text">{label}</p>
+                <p className="mt-2 text-sm text-[#b8a983]">Handcrafted systems built for modern workflows.</p>
                 
               </div>
               
@@ -349,17 +344,12 @@ export default function App() {
 
       <SectionWrapper id="certifications">
         <SectionTitle number="05." title="Certifications" />
-        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-4 md:grid-cols-3">
           {certifications.map((cert, idx) => (
-            <GlassCard key={idx} className="flex flex-col gap-4 p-6 text-[#d7c8a3]">
-              {cert.image && (
-                <img src={cert.image} alt={cert.issuer} className="h-16 w-16 rounded-lg object-cover" />
-              )}
-              <div className="space-y-2">
-                <h3 className="text-xl font-semibold text-text">{cert.title}</h3>
-                <p className="text-sm text-[#b8a983]">{cert.issuer}</p>
-                <span className="block rounded-full border border-accent/20 bg-[rgba(241,231,205,0.08)] px-3 py-2 text-xs uppercase tracking-[0.24em] text-accent">{cert.year}</span>
-              </div>
+            <GlassCard key={idx} className="space-y-3 p-6 text-[#d7c8a3]">
+              <h3 className="text-xl font-semibold text-text">{cert.title}</h3>
+              <p className="text-sm text-[#b8a983]">{cert.issuer}</p>
+              <span className="block rounded-full border border-accent/20 bg-[rgba(241,231,205,0.08)] px-3 py-2 text-xs uppercase tracking-[0.24em] text-accent">{cert.year}</span>
             </GlassCard>
           ))}
         </div>
@@ -462,10 +452,7 @@ export default function App() {
                 <Mail size={18} />
                 Email
               </a>
-              <a href="https://maawaz.vercel.app" target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-2xl border border-[rgba(241,231,205,0.14)] bg-[rgba(241,231,205,0.08)] px-4 py-3 transition hover:border-accent/50 hover:text-accent">
-                <ExternalLink size={18} />
-                Website
-              </a>
+              
             </div>
           </GlassCard>
         </div>
