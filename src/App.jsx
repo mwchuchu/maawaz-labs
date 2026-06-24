@@ -4,9 +4,11 @@ import { motion } from 'framer-motion';
 import emailjs from '@emailjs/browser';
 import { Mail, ExternalLink, Link2, GitBranch, Cpu, Database, Code, Brain } from 'lucide-react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPython, faJsSquare, faCPlusPlus, faGit, faGithub, faDocker, faReact, faMongodb, faCode } from '@fortawesome/free-brands-svg-icons';
-import { faDashboard } from '@fortawesome/free-solid-svg-icons';
+import { faPython, faJsSquare, faGit, faGithub, faDocker, faReact, faCodepen} from '@fortawesome/free-brands-svg-icons';
+import { faDashboard, faDatabase } from '@fortawesome/free-solid-svg-icons';
 import { NeuralSphere } from './components/visuals';
+import { SiRedis ,SiScikitlearn,SiNumpy, SiPytorch, SiTensorflow, SiFastapi, SiPostgresql, SiPandas } from 'react-icons/si';
+import { VscVscode } from "react-icons/vsc";
 
 const SectionWrapper = ({ children, id, className = '' }) => (
   <section id={id} className={`relative py-20 px-6 md:px-10 lg:px-20 ${className}`}>
@@ -92,20 +94,24 @@ export default function App() {
   ];
 
   const technologies = [
-    { name: 'Python', icon: faPython },
-    { name: 'JavaScript', icon: faJsSquare },
-    { name: 'C++', icon: faCPlusPlus },
-    { name: 'Git', icon: faGit },
-    { name: 'GitHub', icon: faGithub },
-    { name: 'Docker', icon: faDocker },
-    { name: 'PyTorch', icon: faDashboard },
-    { name: 'TensorFlow', icon: faDashboard },
-    { name: 'React', icon: faReact },
-    { name: 'FastAPI', icon: faCode },
-    { name: 'MongoDB', icon: faMongodb },
-    { name: 'VS Code', icon: faCode },
-    { name: 'Pandas', icon: faDashboard },
-    { name: 'NumPy', icon: faDashboard },
+    { name: 'Python', icon: faPython, type: 'fa' },
+    { name: 'JavaScript', icon: faJsSquare, type: 'fa' },
+    { name: 'C++', icon: faJsSquare, type: 'fa' },
+    { name: 'Git', icon: faGit, type: 'fa' },
+    { name: 'GitHub', icon: faGithub, type: 'fa' },
+    { name: 'Docker', icon: faDocker, type: 'fa' },
+    { name: 'PyTorch', icon: SiPytorch, type: 'si' },
+    { name: 'TensorFlow', icon: SiTensorflow, type: 'si' },
+    { name: 'React', icon: faReact, type: 'fa' },
+    { name: 'FastAPI', icon: SiFastapi, type: 'si' },
+    { name: 'MongoDB', icon: faDatabase, type: 'fa' },
+    { name: 'PostgreSQL', icon: SiPostgresql, type: 'si' },
+    { name: 'VS Code', icon: VscVscode, type: 'vsc' },
+    { name: 'Pandas', icon: SiPandas, type: 'si' },
+    { name: 'NumPy', icon: SiNumpy, type: 'si' },
+    { name: 'Scikit-learn', icon: SiScikitlearn, type: 'si' },
+    { name: 'Redis', icon: SiRedis, type: 'si' }
+
   ];
 
   const skills = {
@@ -240,7 +246,7 @@ export default function App() {
             </motion.div>
 
             <div className="grid grid-cols-2 gap-6 sm:grid-cols-4">
-              {['50+ Projects', '3 Internships', '90%+ Accuracy', 'CS Graduate'].map((item, idx) => (
+              {['50+ Projects', '90%+ Accuracy', 'CS Graduate'].map((item, idx) => (
                 <div key={idx} className="rounded-3xl border border-[rgba(241,231,205,0.14)] bg-slate-950/70 px-4 py-5 text-center shadow-xl shadow-slate-950/30 backdrop-blur-xl">
                   <p className="text-lg font-semibold text-text">{item.split(' ')[0]}</p>
                   <p className="mt-1 text-sm uppercase tracking-[0.24em] text-[#b8a983]">{item.replace(/^[^ ]+ /, '')}</p>
@@ -266,10 +272,15 @@ export default function App() {
             </p>
           </GlassCard>
           <div className="grid gap-4 sm:grid-cols-2">
-            {['RAG Systems', 'Production APIs', 'Semantic Search', 'AI Automations'].map((label, idx) => (
+            {[
+              { header: 'Deep Learning', tagline: 'Advanced neural networks for complex pattern recognition' },
+              { header: 'Machine Learning', tagline: 'Intelligent algorithms solving real-world problems' },
+              { header: 'RAGs', tagline: 'Semantic retrieval powering intelligent search systems' },
+              { header: 'Full Stack', tagline: 'End-to-end solutions from backend to production' }
+            ].map((item, idx) => (
               <div key={idx} className="rounded-[1.75rem] border border-[rgba(241,231,205,0.14)] bg-slate-950/70 p-6 text-center shadow-[0_25px_60px_-40px_rgba(15,23,42,0.8)]">
-                <p className="text-lg font-semibold text-text">{label}</p>
-                <p className="mt-2 text-sm text-[#b8a983]">Handcrafted systems built for modern workflows.</p>
+                <p className="text-lg font-semibold text-text">{item.header}</p>
+                <p className="mt-2 text-sm text-[#b8a983]">{item.tagline}</p>
                 
               </div>
               
@@ -329,14 +340,21 @@ export default function App() {
         `}</style>
         <div className="tech-slider">
           <div className="tech-track">
-            {[...technologies, ...technologies].map((tech, idx) => (
-              <div key={idx} className="flex flex-col items-center gap-3 flex-shrink-0" style={{ width: '100px' }}>
-                <div className="flex items-center justify-center h-16 w-16 rounded-xl bg-[rgba(241,231,205,0.08)] border border-[rgba(241,231,205,0.14)] shadow-lg hover:scale-110 transition-transform">
-                  <FontAwesomeIcon icon={tech.icon} size="2x" className="text-accent" />
+            {[...technologies, ...technologies].map((tech, idx) => {
+              const IconComponent = tech.icon;
+              return (
+                <div key={idx} className="flex flex-col items-center gap-3 flex-shrink-0" style={{ width: '100px' }}>
+                  <div className="flex items-center justify-center h-16 w-16 rounded-xl bg-[rgba(241,231,205,0.08)] border border-[rgba(241,231,205,0.14)] shadow-lg hover:scale-110 transition-transform">
+                    {tech.type === 'fa' ? (
+                      <FontAwesomeIcon icon={IconComponent} size="2x" className="text-accent" />
+                    ) : (
+                      <IconComponent size={32} className="text-accent" />
+                    )}
+                  </div>
+                  <span className="text-xs text-[#b8a983] text-center font-medium">{tech.name}</span>
                 </div>
-                <span className="text-xs text-[#b8a983] text-center font-medium">{tech.name}</span>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
       </SectionWrapper>
