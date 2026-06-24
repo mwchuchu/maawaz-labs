@@ -3,6 +3,7 @@ import { Canvas } from '@react-three/fiber';
 import { motion } from 'framer-motion';
 import emailjs from '@emailjs/browser';
 import { Mail, ExternalLink, Link2, GitBranch, Cpu, Database, Code, Brain } from 'lucide-react';
+import { SiPython, SiJavascript, SiCplusplus, SiGit, SiGithub, SiDocker, SiPytorch, SiTensorflow, SiReact, SiFastapi, SiMongodb, SiVisualstudiocode, SiPandas, SiNumpy } from 'react-icons/si';
 import { NeuralSphere } from './components/visuals';
 
 const SectionWrapper = ({ children, id, className = '' }) => (
@@ -89,22 +90,20 @@ export default function App() {
   ];
 
   const technologies = [
-    { name: 'Python', logo: '/tech-logos/python.png' },
-    { name: 'JavaScript', logo: '/tech-logos/javascript.png' },
-    { name: 'C++', logo: '/tech-logos/cpp.png' },
-    { name: 'SQL', logo: '/tech-logos/sql.png' },
-    { name: 'Git', logo: '/tech-logos/git.png' },
-    { name: 'GitHub', logo: '/tech-logos/github.png' },
-    { name: 'Docker', logo: '/tech-logos/docker.png' },
-    { name: 'PyTorch', logo: '/tech-logos/pytorch.png' },
-    { name: 'TensorFlow', logo: '/tech-logos/tensorflow.png' },
-    { name: 'React', logo: '/tech-logos/react.png' },
-    { name: 'FastAPI', logo: '/tech-logos/fastapi.png' },
-    { name: 'MongoDB', logo: '/tech-logos/mongodb.png' },
-    { name: 'VS Code', logo: '/tech-logos/vscode.png' },
-    { name: 'Pandas', logo: '/tech-logos/pandas.png' },
-    { name: 'NumPy', logo: '/tech-logos/numpy.png' },
-    { name: 'FAISS', logo: '/tech-logos/faiss.png' },
+    { name: 'Python', icon: SiPython },
+    { name: 'JavaScript', icon: SiJavascript },
+    { name: 'C++', icon: SiCplusplus },
+    { name: 'Git', icon: SiGit },
+    { name: 'GitHub', icon: SiGithub },
+    { name: 'Docker', icon: SiDocker },
+    { name: 'PyTorch', icon: SiPytorch },
+    { name: 'TensorFlow', icon: SiTensorflow },
+    { name: 'React', icon: SiReact },
+    { name: 'FastAPI', icon: SiFastapi },
+    { name: 'MongoDB', icon: SiMongodb },
+    { name: 'VS Code', icon: SiVisualstudiocode },
+    { name: 'Pandas', icon: SiPandas },
+    { name: 'NumPy', icon: SiNumpy },
   ];
 
   const skills = {
@@ -328,14 +327,17 @@ export default function App() {
         `}</style>
         <div className="tech-slider">
           <div className="tech-track">
-            {[...technologies, ...technologies].map((tech, idx) => (
-              <div key={idx} className="flex flex-col items-center gap-3 flex-shrink-0" style={{ width: '100px' }}>
-                <div className="flex items-center justify-center h-16 w-16 rounded-xl bg-[rgba(241,231,205,0.08)] border border-[rgba(241,231,205,0.14)] shadow-lg hover:scale-110 transition-transform">
-                  <img src={tech.logo} alt={tech.name} className="h-10 w-10 object-contain" />
+            {[...technologies, ...technologies].map((tech, idx) => {
+              const IconComponent = tech.icon;
+              return (
+                <div key={idx} className="flex flex-col items-center gap-3 flex-shrink-0" style={{ width: '100px' }}>
+                  <div className="flex items-center justify-center h-16 w-16 rounded-xl bg-[rgba(241,231,205,0.08)] border border-[rgba(241,231,205,0.14)] shadow-lg hover:scale-110 transition-transform">
+                    <IconComponent size={32} className="text-accent" />
+                  </div>
+                  <span className="text-xs text-[#b8a983] text-center font-medium">{tech.name}</span>
                 </div>
-                <span className="text-xs text-[#b8a983] text-center font-medium">{tech.name}</span>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
       </SectionWrapper>
