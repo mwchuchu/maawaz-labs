@@ -92,39 +92,52 @@ export default function App() {
   const projects = [
     {
       title: 'AI-Based Skill Game',
-      desc: 'Built an adaptive mobile quiz app using Gemini Flash 1.5 API with dynamic difficulty levels.',
+      desc: ' Built an adaptive mobile quiz app using Gemini Flash 1.5 API with dynamic difficulty levels.',
       tech: ['React Native', 'MongoDB', 'Gemini Flash', 'Python'],
-      link: '#',
+      github: 'https://github.com/mwchuchu/FYP',
+      live: '#',
     },
     {
       title: 'Enhanced Smart Legal Clause Analyzer',
-      desc: 'Designed a RAG system with FAISS for document chunking, embeddings, and semantic search.',
+      desc: 'Designed a RAG system with FAISS for legal document chunking, embeddings, and semantic search.',
       tech: ['FastAPI', 'FAISS', 'Celery', 'Python'],
-      link: '#',
+      github: 'https://github.com/mwchuchu/legalclauseanalyzer',
+      live: '#',
     },
     {
       title: 'AI Automation Customer Support Agent',
       desc: 'Built a scalable conversational AI for ticket classification, routing, and context-aware responses.',
       tech: ['FastAPI', 'Gemini APIs', 'Python', 'NLP'],
-      link: '#',
+      github: '#',
+      live: '#',
+    },
+    {
+      title:'A clients portfolio website',
+      desc: 'Developed a responsive portfolio website for showcasing projects and skills, with a contact form integrated with EmailJS.',
+      tech: ['React', 'Tailwind CSS', 'EmailJS', 'JavaScript'],
+      github: 'https://github.com/mwchuchu/haseemportfolio',
+      live: 'https://haseemx.vercel.app/',
     },
     {
       title: 'Video-to-Quiz AI Learning Platform',
       desc: 'Converted lecture videos into MCQs using Deepgram transcription and Gemini-powered question generation.',
       tech: ['Deepgram', 'Gemini', 'FastAPI', 'Python'],
-      link: '#',
+      github: '#',
+      live: '#',
     },
     {
       title: 'PDF Chatbot (RAG-Based System)',
       desc: 'Built a multi-document chatbot with embedding retrieval and semantic search across PDF datasets.',
       tech: ['FastAPI', 'Embeddings', 'Python', 'Vector Search'],
-      link: '#',
+      github: '#',
+      live: '#',
     },
-     {
+    {
       title: 'Pokemon Classifier (Pytorch)',
-      desc: '',
+      desc: 'Developed a PyTorch-based image classifier for identifying different Pokemon species.',
       tech: ['FastAPI', 'PyTorch', 'Python', 'HTML/CSS'],
-      link: 'https://github.com/mwchuchu/pokemon-classifier',
+      github: 'https://github.com/mwchuchu/pokemon-classifier',
+      live: '#',
     }
   ];
 
@@ -306,6 +319,18 @@ export default function App() {
                     {t}
                   </span>
                 ))}
+              </div>
+              <div className="flex flex-wrap gap-3 pt-6">
+                {project.github && project.github !== '#' && (
+                  <a href={project.github} target="_blank" rel="noreferrer" className="inline-flex items-center justify-center rounded-full bg-accent px-4 py-2 text-sm font-semibold text-slate-950 transition hover:scale-105">
+                    GitHub
+                  </a>
+                )}
+                {project.live && project.live !== '#' && (
+                  <a href={project.live} target="_blank" rel="noreferrer" className="inline-flex items-center justify-center rounded-full border border-[rgba(241,231,205,0.14)] bg-[rgba(241,231,205,0.08)] px-4 py-2 text-sm font-semibold text-[#d7c8a3] transition hover:border-accent/50 hover:text-accent hover:scale-105">
+                    Live Demo
+                  </a>
+                )}
               </div>
             </GlassCard>
           ))}
