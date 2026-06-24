@@ -3,7 +3,9 @@ import { Canvas } from '@react-three/fiber';
 import { motion } from 'framer-motion';
 import emailjs from '@emailjs/browser';
 import { Mail, ExternalLink, Link2, GitBranch, Cpu, Database, Code, Brain } from 'lucide-react';
-import { SiPython, SiJavascript, SiCplusplus, SiGit, SiGithub, SiDocker, SiPytorch, SiTensorflow, SiReact, SiFastapi, SiMongodb, SiVisualstudiocode, SiPandas, SiNumpy } from 'react-icons/si';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPython, faJsSquare, faCPlusPlus, faGit, faGithub, faDocker, faReact, faMongodb, faCode } from '@fortawesome/free-brands-svg-icons';
+import { faDashboard } from '@fortawesome/free-solid-svg-icons';
 import { NeuralSphere } from './components/visuals';
 
 const SectionWrapper = ({ children, id, className = '' }) => (
@@ -90,20 +92,20 @@ export default function App() {
   ];
 
   const technologies = [
-    { name: 'Python', icon: SiPython },
-    { name: 'JavaScript', icon: SiJavascript },
-    { name: 'C++', icon: SiCplusplus },
-    { name: 'Git', icon: SiGit },
-    { name: 'GitHub', icon: SiGithub },
-    { name: 'Docker', icon: SiDocker },
-    { name: 'PyTorch', icon: SiPytorch },
-    { name: 'TensorFlow', icon: SiTensorflow },
-    { name: 'React', icon: SiReact },
-    { name: 'FastAPI', icon: SiFastapi },
-    { name: 'MongoDB', icon: SiMongodb },
-    { name: 'VS Code', icon: SiVisualstudiocode },
-    { name: 'Pandas', icon: SiPandas },
-    { name: 'NumPy', icon: SiNumpy },
+    { name: 'Python', icon: faPython },
+    { name: 'JavaScript', icon: faJsSquare },
+    { name: 'C++', icon: faCPlusPlus },
+    { name: 'Git', icon: faGit },
+    { name: 'GitHub', icon: faGithub },
+    { name: 'Docker', icon: faDocker },
+    { name: 'PyTorch', icon: faDashboard },
+    { name: 'TensorFlow', icon: faDashboard },
+    { name: 'React', icon: faReact },
+    { name: 'FastAPI', icon: faCode },
+    { name: 'MongoDB', icon: faMongodb },
+    { name: 'VS Code', icon: faCode },
+    { name: 'Pandas', icon: faDashboard },
+    { name: 'NumPy', icon: faDashboard },
   ];
 
   const skills = {
@@ -327,17 +329,14 @@ export default function App() {
         `}</style>
         <div className="tech-slider">
           <div className="tech-track">
-            {[...technologies, ...technologies].map((tech, idx) => {
-              const IconComponent = tech.icon;
-              return (
-                <div key={idx} className="flex flex-col items-center gap-3 flex-shrink-0" style={{ width: '100px' }}>
-                  <div className="flex items-center justify-center h-16 w-16 rounded-xl bg-[rgba(241,231,205,0.08)] border border-[rgba(241,231,205,0.14)] shadow-lg hover:scale-110 transition-transform">
-                    <IconComponent size={32} className="text-accent" />
-                  </div>
-                  <span className="text-xs text-[#b8a983] text-center font-medium">{tech.name}</span>
+            {[...technologies, ...technologies].map((tech, idx) => (
+              <div key={idx} className="flex flex-col items-center gap-3 flex-shrink-0" style={{ width: '100px' }}>
+                <div className="flex items-center justify-center h-16 w-16 rounded-xl bg-[rgba(241,231,205,0.08)] border border-[rgba(241,231,205,0.14)] shadow-lg hover:scale-110 transition-transform">
+                  <FontAwesomeIcon icon={tech.icon} size="2x" className="text-accent" />
                 </div>
-              );
-            })}
+                <span className="text-xs text-[#b8a983] text-center font-medium">{tech.name}</span>
+              </div>
+            ))}
           </div>
         </div>
       </SectionWrapper>
