@@ -169,6 +169,13 @@ export default function App() {
       tech: ['FastAPI', 'PyTorch', 'Python', 'HTML/CSS'],
       github: 'https://github.com/mwchuchu/pokemon-classifier',
       live: '#',
+    },
+    {
+      title: "Spam SMS classifier",
+      desc: "Built a machine learning model to classify SMS messages as spam or not spam using NLP techniques.",
+      tech: ["Python", "Scikit-learn", "NLP"],
+      github: "https://github.com/mwchuchu/spam-sms-classifier",
+      live: "https://huggingface.co/spaces/maawaz/spam-classifier"
     }
   ];
 
