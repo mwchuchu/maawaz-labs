@@ -168,7 +168,7 @@ export default function App() {
       desc: 'Developed a PyTorch-based image classifier for identifying different Pokemon species.',
       tech: ['FastAPI', 'PyTorch', 'Python', 'HTML/CSS'],
       github: 'https://github.com/mwchuchu/pokemon-classifier',
-      live: '#',
+      live: 'https://huggingface.co/spaces/maawaz/pokemon-classifier',
     },
     {
       title: "Spam SMS classifier",
