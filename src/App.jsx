@@ -282,7 +282,7 @@ export default function App() {
     },
   ];
 
-  // Bento Skills
+  // Bento Skills with Distinct Vibrant Color Palettes
   const bentoSkills = [
     {
       id: 'rag-genai',
@@ -292,14 +292,14 @@ export default function App() {
       description: 'End-to-end generative AI systems, semantic vector search, prompt tuning, and real-time knowledge retrieval.',
       icon: Bot,
       skills: [
-        { name: 'RAG Pipelines', level: 'Expert', icon: Search },
-        { name: 'FAISS Vector DB', level: 'Expert', icon: Database },
-        { name: 'LLMs & Prompting', level: 'Advanced', icon: Bot },
-        { name: 'Transformers', level: 'Advanced', icon: Workflow },
-        { name: 'Embeddings', level: 'Advanced', icon: Network },
-        { name: 'Sentence Transformers', level: 'Advanced', icon: Brain },
-        { name: 'Gemini API 1.5', level: 'Expert', icon: SiGoogle },
-        { name: 'Claude 101 & MCP', level: 'Certified', icon: SiAnthropic },
+        { name: 'RAG Pipelines', level: 'Expert', icon: Search, color: '#ff2d87', bg: '#fff0f6', shadow: '#ff2d87', badgeClass: 'bg-pink-100 text-pink-800' },
+        { name: 'FAISS Vector DB', level: 'Expert', icon: Database, color: '#0284c7', bg: '#f0f9ff', shadow: '#0284c7', badgeClass: 'bg-sky-100 text-sky-800' },
+        { name: 'LLMs & Prompting', level: 'Advanced', icon: Bot, color: '#8b5cf6', bg: '#f5f3ff', shadow: '#8b5cf6', badgeClass: 'bg-purple-100 text-purple-800' },
+        { name: 'Transformers', level: 'Advanced', icon: Workflow, color: '#d97706', bg: '#fffbeb', shadow: '#d97706', badgeClass: 'bg-amber-100 text-amber-800' },
+        { name: 'Embeddings', level: 'Advanced', icon: Network, color: '#6366f1', bg: '#eef2ff', shadow: '#6366f1', badgeClass: 'bg-indigo-100 text-indigo-800' },
+        { name: 'Sentence Transformers', level: 'Advanced', icon: Brain, color: '#059669', bg: '#ecfdf5', shadow: '#059669', badgeClass: 'bg-emerald-100 text-emerald-800' },
+        { name: 'Gemini API 1.5', level: 'Expert', icon: SiGoogle, color: '#2563eb', bg: '#eff6ff', shadow: '#2563eb', badgeClass: 'bg-blue-100 text-blue-800' },
+        { name: 'Claude 101 & MCP', level: 'Certified', icon: SiAnthropic, color: '#ea580c', bg: '#fff7ed', shadow: '#ea580c', badgeClass: 'bg-orange-100 text-orange-800' },
       ],
     },
     {
@@ -310,14 +310,14 @@ export default function App() {
       description: 'Supervised & unsupervised model engineering, deep convolutional networks, transfer learning, and sequence modeling.',
       icon: Cpu,
       skills: [
-        { name: 'PyTorch', level: 'Advanced', icon: SiPytorch },
-        { name: 'TensorFlow', level: 'Advanced', icon: SiTensorflow },
-        { name: 'Scikit-learn', level: 'Expert', icon: SiScikitlearn },
-        { name: 'Computer Vision', level: 'Advanced', icon: Cpu },
-        { name: 'Transfer Learning', level: 'Advanced', icon: Layers },
-        { name: 'LSTM & Bi-LSTM', level: 'Advanced', icon: Brain },
-        { name: 'Model Evaluation', level: 'Expert', icon: CheckCircle2 },
-        { name: 'Pandas & NumPy', level: 'Expert', icon: SiPandas },
+        { name: 'PyTorch', level: 'Advanced', icon: SiPytorch, color: '#ee4c2c', bg: '#fff5f2', shadow: '#ee4c2c', badgeClass: 'bg-orange-100 text-orange-900' },
+        { name: 'TensorFlow', level: 'Advanced', icon: SiTensorflow, color: '#ff6f00', bg: '#fff8f0', shadow: '#ff6f00', badgeClass: 'bg-amber-100 text-amber-900' },
+        { name: 'Scikit-learn', level: 'Expert', icon: SiScikitlearn, color: '#0284c7', bg: '#f0f9ff', shadow: '#0284c7', badgeClass: 'bg-sky-100 text-sky-900' },
+        { name: 'Computer Vision', level: 'Advanced', icon: Cpu, color: '#0d9488', bg: '#f0fdfa', shadow: '#0d9488', badgeClass: 'bg-teal-100 text-teal-900' },
+        { name: 'Transfer Learning', level: 'Advanced', icon: Layers, color: '#7c3aed', bg: '#f5f3ff', shadow: '#7c3aed', badgeClass: 'bg-violet-100 text-violet-900' },
+        { name: 'LSTM & Bi-LSTM', level: 'Advanced', icon: Brain, color: '#db2777', bg: '#fdf2f8', shadow: '#db2777', badgeClass: 'bg-pink-100 text-pink-900' },
+        { name: 'Model Evaluation', level: 'Expert', icon: CheckCircle2, color: '#16a34a', bg: '#f0fdf4', shadow: '#16a34a', badgeClass: 'bg-green-100 text-green-900' },
+        { name: 'Pandas & NumPy', level: 'Expert', icon: SiPandas, color: '#4338ca', bg: '#eef2ff', shadow: '#4338ca', badgeClass: 'bg-indigo-100 text-indigo-900' },
       ],
     },
     {
@@ -328,14 +328,14 @@ export default function App() {
       description: 'Building low-latency model inference endpoints, asynchronous queue workers, and containerized deployments.',
       icon: Server,
       skills: [
-        { name: 'FastAPI', level: 'Expert', icon: SiFastapi },
-        { name: 'Flask', level: 'Advanced', icon: SiFlask },
-        { name: 'Celery Workers', level: 'Advanced', icon: Zap },
-        { name: 'REST API Design', level: 'Expert', icon: Terminal },
-        { name: 'Docker', level: 'Advanced', icon: faDocker, isFa: true },
-        { name: 'ML Pipelines', level: 'Advanced', icon: Layers },
-        { name: 'Python', level: 'Expert', icon: faPython, isFa: true },
-        { name: 'Git & CI/CD', level: 'Expert', icon: faDocker, isFa: true },
+        { name: 'FastAPI', level: 'Expert', icon: SiFastapi, color: '#009688', bg: '#f0fdfa', shadow: '#009688', badgeClass: 'bg-teal-100 text-teal-900' },
+        { name: 'Flask', level: 'Advanced', icon: SiFlask, color: '#334155', bg: '#f8fafc', shadow: '#334155', badgeClass: 'bg-slate-200 text-slate-900' },
+        { name: 'Celery Workers', level: 'Advanced', icon: Zap, color: '#65a30d', bg: '#f7fee7', shadow: '#65a30d', badgeClass: 'bg-lime-100 text-lime-900' },
+        { name: 'REST API Design', level: 'Expert', icon: Terminal, color: '#9333ea', bg: '#faf5ff', shadow: '#9333ea', badgeClass: 'bg-purple-100 text-purple-900' },
+        { name: 'Docker', level: 'Advanced', icon: faDocker, isFa: true, color: '#2496ed', bg: '#f0f9ff', shadow: '#2496ed', badgeClass: 'bg-sky-100 text-sky-900' },
+        { name: 'ML Pipelines', level: 'Advanced', icon: Layers, color: '#e11d48', bg: '#fff1f2', shadow: '#e11d48', badgeClass: 'bg-rose-100 text-rose-900' },
+        { name: 'Python', level: 'Expert', icon: faPython, isFa: true, color: '#3776ab', bg: '#eff6ff', shadow: '#3776ab', badgeClass: 'bg-blue-100 text-blue-900' },
+        { name: 'Git & CI/CD', level: 'Expert', icon: faDocker, isFa: true, color: '#f05032', bg: '#fff5f3', shadow: '#f05032', badgeClass: 'bg-orange-100 text-orange-900' },
       ],
     },
     {
@@ -346,14 +346,14 @@ export default function App() {
       description: 'Data persistence layers, interactive reactive web dashboards, and mobile user interfaces.',
       icon: Database,
       skills: [
-        { name: 'MongoDB', level: 'Advanced', icon: SiMongodb },
-        { name: 'PostgreSQL & SQL', level: 'Advanced', icon: SiPostgresql },
-        { name: 'Redis Cache', level: 'Intermediate', icon: SiRedis },
-        { name: 'React', level: 'Advanced', icon: faReact, isFa: true },
-        { name: 'React Native', level: 'Intermediate', icon: faReact, isFa: true },
-        { name: 'JavaScript', level: 'Advanced', icon: faJsSquare, isFa: true },
-        { name: 'C++', level: 'Intermediate', icon: SiCplusplus },
-        { name: 'VS Code & Postman', level: 'Expert', icon: Terminal },
+        { name: 'MongoDB', level: 'Advanced', icon: SiMongodb, color: '#10b981', bg: '#ecfdf5', shadow: '#10b981', badgeClass: 'bg-emerald-100 text-emerald-900' },
+        { name: 'PostgreSQL & SQL', level: 'Advanced', icon: SiPostgresql, color: '#336791', bg: '#f0f7ff', shadow: '#336791', badgeClass: 'bg-sky-100 text-sky-900' },
+        { name: 'Redis Cache', level: 'Intermediate', icon: SiRedis, color: '#dc2626', bg: '#fef2f2', shadow: '#dc2626', badgeClass: 'bg-red-100 text-red-900' },
+        { name: 'React', level: 'Advanced', icon: faReact, isFa: true, color: '#06b6d4', bg: '#ecfeff', shadow: '#06b6d4', badgeClass: 'bg-cyan-100 text-cyan-900' },
+        { name: 'React Native', level: 'Intermediate', icon: faReact, isFa: true, color: '#6366f1', bg: '#eef2ff', shadow: '#6366f1', badgeClass: 'bg-indigo-100 text-indigo-900' },
+        { name: 'JavaScript', level: 'Advanced', icon: faJsSquare, isFa: true, color: '#ca8a04', bg: '#fefce8', shadow: '#ca8a04', badgeClass: 'bg-yellow-100 text-yellow-900' },
+        { name: 'C++', level: 'Intermediate', icon: SiCplusplus, color: '#00599c', bg: '#f0f6ff', shadow: '#00599c', badgeClass: 'bg-blue-100 text-blue-900' },
+        { name: 'VS Code & Postman', level: 'Expert', icon: Terminal, color: '#ea580c', bg: '#fff7ed', shadow: '#ea580c', badgeClass: 'bg-orange-100 text-orange-900' },
       ],
     },
   ];
@@ -660,11 +660,11 @@ export default function App() {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.65, duration: 0.5 }}
-                  className="flex flex-wrap items-center gap-4 pt-2"
+                  className="flex flex-col sm:flex-row flex-wrap items-stretch sm:items-center gap-3 pt-2"
                 >
                   <a
                     href="#contact"
-                    className="inline-flex items-center gap-2 rounded-xl paper-btn-primary px-7 py-3.5 text-sm font-black active:scale-95"
+                    className="inline-flex items-center justify-center gap-2 rounded-xl paper-btn-primary px-6 py-3.5 text-xs sm:text-sm font-black active:scale-95 text-center"
                   >
                     Collaborate
                     <ArrowUpRight size={16} />
@@ -673,7 +673,7 @@ export default function App() {
                   <a
                     href="/Muhammad_Maawaz_CV.pdf"
                     download
-                    className="inline-flex items-center gap-2 rounded-xl paper-btn-secondary px-6 py-3.5 text-sm font-black"
+                    className="inline-flex items-center justify-center gap-2 rounded-xl paper-btn-secondary px-5 py-3.5 text-xs sm:text-sm font-black text-center"
                   >
                     <FileDown size={16} className="text-pink-600" />
                     Download Resume
@@ -681,7 +681,7 @@ export default function App() {
 
                   <a
                     href="#projects"
-                    className="inline-flex items-center gap-1.5 px-4 py-3.5 text-sm font-bold text-slate-700 hover:text-slate-950 transition underline underline-offset-4"
+                    className="inline-flex items-center justify-center gap-1.5 px-3 py-3 text-xs sm:text-sm font-bold text-slate-700 hover:text-slate-950 transition underline underline-offset-4 text-center"
                   >
                     Explore Projects →
                   </a>
@@ -692,34 +692,34 @@ export default function App() {
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   transition={{ delay: 0.75, duration: 0.5 }}
-                  className="flex items-center gap-3 pt-4 border-t-2 border-slate-300"
+                  className="flex flex-wrap items-center gap-2.5 sm:gap-3 pt-4 border-t-2 border-slate-300"
                 >
-                  <span className="text-xs text-slate-600 font-mono font-bold">CONNECT:</span>
+                  <span className="text-[11px] sm:text-xs text-slate-600 font-mono font-bold">CONNECT:</span>
                   <a
                     href="https://github.com/mwchuchu"
                     target="_blank"
                     rel="noreferrer"
-                    className="flex h-10 w-10 items-center justify-center rounded-xl border-2 border-slate-900 bg-white text-slate-900 shadow-[2px_2px_0px_#0f172a] transition hover:translate-x-[-1px] hover:translate-y-[-1px] hover:shadow-[3px_3px_0px_#0f172a]"
+                    className="flex h-9 w-9 sm:h-10 sm:w-10 items-center justify-center rounded-xl border-2 border-slate-900 bg-white text-slate-900 shadow-[2px_2px_0px_#0f172a] transition hover:translate-x-[-1px] hover:translate-y-[-1px] hover:shadow-[3px_3px_0px_#0f172a]"
                     aria-label="GitHub Profile"
                   >
-                    <FaGithub size={18} />
+                    <FaGithub size={16} />
                   </a>
                   <a
                     href="https://linkedin.com/in/maawaz"
                     target="_blank"
                     rel="noreferrer"
-                    className="flex h-10 w-10 items-center justify-center rounded-xl border-2 border-slate-900 bg-white text-slate-900 shadow-[2px_2px_0px_#0f172a] transition hover:translate-x-[-1px] hover:translate-y-[-1px] hover:shadow-[3px_3px_0px_#0f172a]"
+                    className="flex h-9 w-9 sm:h-10 sm:w-10 items-center justify-center rounded-xl border-2 border-slate-900 bg-white text-slate-900 shadow-[2px_2px_0px_#0f172a] transition hover:translate-x-[-1px] hover:translate-y-[-1px] hover:shadow-[3px_3px_0px_#0f172a]"
                     aria-label="LinkedIn Profile"
                   >
-                    <FaLinkedin size={18} className="text-blue-600" />
+                    <FaLinkedin size={16} className="text-blue-600" />
                   </a>
                   <button
                     onClick={handleCopyEmail}
-                    className="inline-flex items-center gap-2 rounded-xl border-2 border-slate-900 bg-white px-3.5 py-2 text-xs font-mono font-bold text-slate-900 shadow-[2px_2px_0px_#0f172a] transition hover:translate-x-[-1px] hover:translate-y-[-1px] hover:shadow-[3px_3px_0px_#0f172a]"
+                    className="inline-flex items-center gap-1.5 sm:gap-2 rounded-xl border-2 border-slate-900 bg-white px-2.5 sm:px-3.5 py-2 text-[10px] sm:text-xs font-mono font-bold text-slate-900 shadow-[2px_2px_0px_#0f172a] transition hover:translate-x-[-1px] hover:translate-y-[-1px] hover:shadow-[3px_3px_0px_#0f172a] truncate max-w-[210px] sm:max-w-none"
                     title="Click to copy email"
                   >
-                    {copiedEmail ? <Check size={14} className="text-pink-600" /> : <Copy size={14} />}
-                    {copiedEmail ? 'Copied to Clipboard!' : 'maawazali111@gmail.com'}
+                    {copiedEmail ? <Check size={13} className="text-pink-600 flex-shrink-0" /> : <Copy size={13} className="flex-shrink-0" />}
+                    <span className="truncate">{copiedEmail ? 'Copied to Clipboard!' : 'maawazali111@gmail.com'}</span>
                   </button>
                 </motion.div>
               </motion.div>
@@ -731,12 +731,12 @@ export default function App() {
                 transition={{ duration: 0.9, delay: 0.35, ease: [0.22, 1, 0.36, 1] }}
                 className="lg:col-span-5 flex justify-center lg:justify-end"
               >
-                <div className="relative w-72 sm:w-80 md:w-96">
+                <div className="relative w-64 sm:w-72 md:w-80 lg:w-96">
                   {/* Washi Tape Accent */}
                   <div className="washi-tape washi-tape-pink"></div>
 
                   {/* Main Polaroid Paper Card */}
-                  <div className="relative rounded-2xl border-2 border-slate-900 bg-white p-4 pb-6 shadow-[6px_6px_0px_#0f172a] transition-transform duration-300 hover:rotate-1">
+                  <div className="relative rounded-2xl border-2 border-slate-900 bg-white p-3.5 sm:p-4 pb-5 sm:pb-6 shadow-[6px_6px_0px_#0f172a] transition-transform duration-300 hover:rotate-1">
                     <div className="relative overflow-hidden rounded-xl aspect-[4/5] border-2 border-slate-900 bg-slate-100">
                       <img
                         src="/DP/maawaz-DP.png"
@@ -747,12 +747,12 @@ export default function App() {
                     </div>
 
                     {/* Polaroid Bottom Note */}
-                    <div className="mt-4 flex items-center justify-between px-1">
+                    <div className="mt-3.5 sm:mt-4 flex items-center justify-between px-1">
                       <div>
-                        <p className="text-sm font-black text-slate-900 font-['Space_Grotesk']">Muhammad Maawaz</p>
-                        <p className="text-xs text-slate-600 font-mono font-bold">Applied ML & AI Engineer</p>
+                        <p className="text-xs sm:text-sm font-black text-slate-900 font-['Space_Grotesk']">Muhammad Maawaz</p>
+                        <p className="text-[10px] sm:text-xs text-slate-600 font-mono font-bold">Applied ML & AI Engineer</p>
                       </div>
-                      <span className="rounded-lg border-2 border-slate-900 bg-pink-100 px-2 py-0.5 text-[10px] font-mono font-bold text-pink-800 shadow-[1px_1px_0px_#0f172a]">
+                      <span className="rounded-lg border-2 border-slate-900 bg-pink-100 px-2 py-0.5 text-[9px] sm:text-[10px] font-mono font-bold text-pink-800 shadow-[1px_1px_0px_#0f172a]">
                         RAG / LLMs
                       </span>
                     </div>
@@ -763,11 +763,11 @@ export default function App() {
                     initial={{ scale: 0, rotate: -12 }}
                     animate={{ scale: 1, rotate: 0 }}
                     transition={{ delay: 0.7, type: 'spring', stiffness: 200, damping: 12 }}
-                    className="absolute -top-3 -left-4 sm:-left-6 rounded-xl border-2 border-slate-900 bg-white px-3.5 py-2 shadow-[4px_4px_0px_#ff2d87] z-20"
+                    className="absolute -top-3 -left-2 sm:-left-6 rounded-xl border-2 border-slate-900 bg-white px-2.5 sm:px-3.5 py-1.5 sm:py-2 shadow-[3px_3px_0px_#ff2d87] z-20"
                   >
-                    <div className="flex items-center gap-2">
-                      <Brain size={16} className="text-pink-600" />
-                      <span className="text-xs font-black text-slate-900">RAG Specialist</span>
+                    <div className="flex items-center gap-1.5 sm:gap-2">
+                      <Brain size={14} className="text-pink-600" />
+                      <span className="text-[10px] sm:text-xs font-black text-slate-900">RAG Specialist</span>
                     </div>
                   </motion.div>
 
@@ -776,11 +776,11 @@ export default function App() {
                     initial={{ scale: 0, rotate: 12 }}
                     animate={{ scale: 1, rotate: 0 }}
                     transition={{ delay: 0.85, type: 'spring', stiffness: 200, damping: 12 }}
-                    className="absolute -bottom-3 -right-4 sm:-right-6 rounded-xl border-2 border-slate-900 bg-white px-3.5 py-2 shadow-[4px_4px_0px_#8b5cf6] z-20"
+                    className="absolute -bottom-3 -right-2 sm:-right-6 rounded-xl border-2 border-slate-900 bg-white px-2.5 sm:px-3.5 py-1.5 sm:py-2 shadow-[3px_3px_0px_#8b5cf6] z-20"
                   >
-                    <div className="flex items-center gap-2">
-                      <Cpu size={16} className="text-purple-600" />
-                      <span className="text-xs font-black text-slate-900">90%+ Accuracy</span>
+                    <div className="flex items-center gap-1.5 sm:gap-2">
+                      <Cpu size={14} className="text-purple-600" />
+                      <span className="text-[10px] sm:text-xs font-black text-slate-900">90%+ Accuracy</span>
                     </div>
                   </motion.div>
                 </div>
@@ -788,7 +788,7 @@ export default function App() {
             </div>
 
             {/* Metrics Counter Bar with Staggered Entrance */}
-            <div className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-4">
+            <div className="mt-12 sm:mt-16 grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4">
               {stats.map((stat, i) => (
                 <motion.div
                   key={i}
@@ -796,12 +796,12 @@ export default function App() {
                   whileInView={{ opacity: 1, y: 0, scale: 1 }}
                   viewport={{ once: true, margin: '-30px' }}
                   transition={{ duration: 0.5, delay: i * 0.1, ease: 'easeOut' }}
-                  className="paper-card p-6 text-center"
+                  className="paper-card p-4 sm:p-6 text-center"
                 >
-                  <p className="text-3xl sm:text-4xl font-black font-['Space_Grotesk'] text-slate-900" style={{ color: stat.color }}>
+                  <p className="text-2xl sm:text-3xl xl:text-4xl font-black font-['Space_Grotesk'] text-slate-900" style={{ color: stat.color }}>
                     {stat.value}
                   </p>
-                  <p className="mt-1 text-xs uppercase tracking-wider text-slate-700 font-bold">
+                  <p className="mt-1 text-[10px] sm:text-xs uppercase tracking-wider text-slate-700 font-bold">
                     {stat.label}
                   </p>
                 </motion.div>
@@ -950,26 +950,37 @@ export default function App() {
                       </p>
                     </div>
 
-                    {/* Compact Interactive Skill Chips */}
+                    {/* Compact Interactive Skill Chips with Distinct Vibrant Colors */}
                     <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5 pt-3 border-t-2 border-slate-100">
                       {group.skills.map((skill) => {
                         const Icon = skill.icon;
                         return (
                           <div
                             key={skill.name}
-                            className="flex flex-col items-center justify-center gap-1 rounded-xl border-2 border-slate-900 bg-[#faf8f5] p-2.5 text-center shadow-[2px_2px_0px_#0f172a] transition hover:translate-x-[-1px] hover:translate-y-[-1px] hover:shadow-[3px_3px_0px_#ff2d87] group"
+                            style={{
+                              backgroundColor: skill.bg || '#faf8f5',
+                              boxShadow: `3px 3px 0px ${skill.shadow || '#0f172a'}`,
+                            }}
+                            className="flex flex-col items-center justify-center gap-1.5 rounded-xl border-2 border-slate-900 p-2.5 text-center transition-all duration-200 hover:translate-x-[-1px] hover:translate-y-[-1px] hover:scale-[1.03] group cursor-default"
                           >
-                            <div className="flex h-6 w-6 items-center justify-center text-slate-900 group-hover:text-pink-600 transition-colors">
+                            <div
+                              className="flex h-7 w-7 items-center justify-center rounded-lg border border-slate-900/15 bg-white/90 shadow-[1px_1px_0px_#0f172a] transition-transform group-hover:scale-110"
+                              style={{ color: skill.color }}
+                            >
                               {skill.isFa ? (
-                                <FontAwesomeIcon icon={Icon} size="lg" />
+                                <FontAwesomeIcon icon={Icon} size="sm" />
                               ) : (
-                                <Icon size={18} />
+                                <Icon size={16} />
                               )}
                             </div>
-                            <span className="text-xs font-black text-slate-900 leading-tight">
+                            <span className="text-[11px] sm:text-xs font-black text-slate-900 leading-tight">
                               {skill.name}
                             </span>
-                            <span className="text-[9px] font-mono font-bold text-slate-500 uppercase">
+                            <span
+                              className={`text-[8px] sm:text-[9px] font-mono font-black uppercase px-1.5 py-0.5 rounded border border-slate-900/20 ${
+                                skill.badgeClass || 'bg-white/80 text-slate-700'
+                              }`}
+                            >
                               {skill.level}
                             </span>
                           </div>
@@ -1110,7 +1121,7 @@ export default function App() {
         {/* =========================================================================
             EXPERIENCE TIMELINE
         ========================================================================== */}
-        <section id="experience" className="py-24 relative bg-white border-y-2 border-slate-900">
+        <section id="experience" className="py-16 sm:py-24 relative bg-white border-y-2 border-slate-900">
           <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
             <SectionHeader
               badge="Work Experience"
@@ -1118,7 +1129,7 @@ export default function App() {
               subtitle="Track record of engineering machine learning models, search intent classification, and production RAG pipelines."
             />
 
-            <div className="relative border-l-2 border-slate-900 pl-6 sm:pl-10 ml-3 sm:ml-6 space-y-12">
+            <div className="relative border-l-2 border-slate-900 pl-4 sm:pl-8 ml-2.5 sm:ml-4 space-y-8 sm:space-y-12">
               {experiences.map((exp, idx) => (
                 <motion.div
                   key={idx}
@@ -1129,35 +1140,35 @@ export default function App() {
                   className="relative group"
                 >
                   {/* Stamped Node on Timeline */}
-                  <div className="absolute -left-[31px] sm:-left-[47px] top-1.5 flex h-6 w-6 items-center justify-center rounded-full border-2 border-slate-900 bg-slate-900 text-white shadow-[2px_2px_0px_#ff2d87]">
-                    <div className="h-2 w-2 rounded-full bg-pink-500" />
+                  <div className="absolute -left-[25px] sm:-left-[41px] top-1.5 flex h-5 w-5 sm:h-6 sm:w-6 items-center justify-center rounded-full border-2 border-slate-900 bg-slate-900 text-white shadow-[2px_2px_0px_#ff2d87]">
+                    <div className="h-1.5 w-1.5 sm:h-2 sm:w-2 rounded-full bg-pink-500" />
                   </div>
 
                   {/* Experience Card */}
-                  <div className="paper-card p-7 sm:p-8 space-y-4">
+                  <div className="paper-card p-5 sm:p-8 space-y-4">
                     {/* Header */}
                     <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
                       <div>
                         <div className="flex items-center gap-2.5">
-                          <h3 className="text-xl sm:text-2xl font-black text-slate-900 font-['Space_Grotesk']">
+                          <h3 className="text-lg sm:text-2xl font-black text-slate-900 font-['Space_Grotesk']">
                             {exp.role}
                           </h3>
                           {exp.current && (
-                            <span className="rounded-md border-2 border-pink-500 bg-pink-100 px-2 py-0.5 text-[10px] font-mono font-black text-pink-700">
+                            <span className="rounded-md border-2 border-pink-500 bg-pink-100 px-2 py-0.5 text-[9px] sm:text-[10px] font-mono font-black text-pink-700">
                               Present
                             </span>
                           )}
                         </div>
-                        <p className="text-sm font-bold text-slate-700 mt-0.5">
+                        <p className="text-xs sm:text-sm font-bold text-slate-700 mt-0.5">
                           {exp.company} • <span className="text-slate-500 font-medium">{exp.location}</span>
                         </p>
                       </div>
-                      <span className="rounded-lg border-2 border-slate-900 bg-[#faf8f5] px-3 py-1 text-xs font-mono font-bold text-slate-900 w-max shadow-[2px_2px_0px_#0f172a]">
+                      <span className="rounded-lg border-2 border-slate-900 bg-[#faf8f5] px-2.5 sm:px-3 py-1 text-[11px] sm:text-xs font-mono font-bold text-slate-900 w-max shadow-[2px_2px_0px_#0f172a]">
                         {exp.period}
                       </span>
                     </div>
 
-                    <p className="text-sm text-slate-700 leading-relaxed font-medium">
+                    <p className="text-xs sm:text-sm text-slate-700 leading-relaxed font-medium">
                       {exp.description}
                     </p>
 
@@ -1165,18 +1176,18 @@ export default function App() {
                     <ul className="space-y-2 text-xs sm:text-sm text-slate-700 font-medium">
                       {exp.achievements.map((item, i) => (
                         <li key={i} className="flex items-start gap-2.5">
-                          <CheckCircle2 size={16} className="text-pink-600 flex-shrink-0 mt-0.5" />
+                          <CheckCircle2 size={15} className="text-pink-600 flex-shrink-0 mt-0.5" />
                           <span>{item}</span>
                         </li>
                       ))}
                     </ul>
 
                     {/* Tech Pills */}
-                    <div className="flex flex-wrap gap-2 pt-2 border-t-2 border-slate-100">
+                    <div className="flex flex-wrap gap-1.5 sm:gap-2 pt-2 border-t-2 border-slate-100">
                       {exp.tags.map((tag) => (
                         <span
                           key={tag}
-                          className="rounded-md border border-slate-300 bg-slate-100 px-2.5 py-1 text-[11px] font-mono font-bold text-slate-800"
+                          className="rounded-md border border-slate-300 bg-slate-100 px-2 sm:px-2.5 py-0.5 sm:py-1 text-[10px] sm:text-[11px] font-mono font-bold text-slate-800"
                         >
                           {tag}
                         </span>
@@ -1192,7 +1203,7 @@ export default function App() {
         {/* =========================================================================
             CERTIFICATIONS SECTION (11 CERTIFICATES)
         ========================================================================== */}
-        <section id="certifications" className="py-24 relative">
+        <section id="certifications" className="py-16 sm:py-24 relative">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <SectionHeader
               badge="Credentials"
@@ -1200,7 +1211,7 @@ export default function App() {
               subtitle="Continuous learning and verified technical proficiency across Anthropic, Google, Coursera, and freeCodeCamp."
             />
 
-            <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3.5 sm:gap-4">
               {certifications.map((cert, idx) => {
                 const Icon = cert.icon;
                 return (
@@ -1211,11 +1222,11 @@ export default function App() {
                     viewport={{ once: true, margin: '-30px' }}
                     transition={{ duration: 0.45, delay: (idx % 4) * 0.08, ease: 'easeOut' }}
                     whileHover={{ y: -3 }}
-                    className="paper-card p-5 flex flex-col justify-between gap-4"
+                    className="paper-card p-4 sm:p-5 flex flex-col justify-between gap-3 sm:gap-4"
                   >
                     <div className="flex items-start justify-between">
-                      <div className="flex h-10 w-10 items-center justify-center rounded-xl border-2 border-slate-900 bg-slate-900 text-white shadow-[2px_2px_0px_#ff2d87]">
-                        <Icon size={20} style={{ color: cert.color }} />
+                      <div className="flex h-9 w-9 sm:h-10 sm:w-10 items-center justify-center rounded-xl border-2 border-slate-900 bg-slate-900 text-white shadow-[2px_2px_0px_#ff2d87]">
+                        <Icon size={18} style={{ color: cert.color }} />
                       </div>
                       <span className="rounded-md border border-slate-300 bg-slate-100 px-2 py-0.5 text-[10px] font-mono font-bold text-slate-700">
                         {cert.year}
@@ -1223,17 +1234,17 @@ export default function App() {
                     </div>
 
                     <div className="space-y-1">
-                      <h4 className="text-sm font-black text-slate-900">
+                      <h4 className="text-xs sm:text-sm font-black text-slate-900">
                         {cert.title}
                       </h4>
-                      <p className="text-xs text-slate-600 font-medium">{cert.issuer}</p>
+                      <p className="text-[11px] sm:text-xs text-slate-600 font-medium">{cert.issuer}</p>
                     </div>
 
                     <div className="pt-2 border-t border-slate-200 flex items-center justify-between">
-                      <span className="text-[10px] font-mono font-black text-pink-600">
+                      <span className="text-[9px] sm:text-[10px] font-mono font-black text-pink-600">
                         {cert.badge}
                       </span>
-                      <Check size={14} className="text-slate-900 font-black" />
+                      <Check size={13} className="text-slate-900 font-black" />
                     </div>
                   </motion.div>
                 );
@@ -1245,7 +1256,7 @@ export default function App() {
         {/* =========================================================================
             EDUCATION SECTION
         ========================================================================== */}
-        <section id="education" className="py-20 relative bg-white border-y-2 border-slate-900">
+        <section id="education" className="py-16 sm:py-20 relative bg-white border-y-2 border-slate-900">
           <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
             <SectionHeader
               badge="Academic Background"
@@ -1258,20 +1269,20 @@ export default function App() {
               whileInView={{ opacity: 1, y: 0, scale: 1 }}
               viewport={{ once: true, margin: '-40px' }}
               transition={{ duration: 0.6, ease: 'easeOut' }}
-              className="paper-card p-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6"
+              className="paper-card p-5 sm:p-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-5 sm:gap-6"
             >
-              <div className="flex items-start gap-4">
-                <div className="flex h-14 w-14 items-center justify-center rounded-2xl border-2 border-slate-900 bg-slate-900 text-white shadow-[3px_3px_0px_#ff2d87] flex-shrink-0">
-                  <GraduationCap size={28} />
+              <div className="flex items-start gap-3 sm:gap-4">
+                <div className="flex h-11 w-11 sm:h-14 sm:w-14 items-center justify-center rounded-2xl border-2 border-slate-900 bg-slate-900 text-white shadow-[3px_3px_0px_#ff2d87] flex-shrink-0">
+                  <GraduationCap size={24} className="sm:w-7 sm:h-7" />
                 </div>
                 <div className="space-y-1">
                   <span className="rounded-md border-2 border-pink-500 bg-pink-100 px-2.5 py-0.5 text-[10px] font-mono font-black text-pink-700">
                     Graduated
                   </span>
-                  <h3 className="text-xl sm:text-2xl font-black text-slate-900 font-['Space_Grotesk']">
+                  <h3 className="text-lg sm:text-2xl font-black text-slate-900 font-['Space_Grotesk']">
                     Bachelor of Science in Computer Science (BSCS)
                   </h3>
-                  <p className="text-sm text-slate-700 font-bold">
+                  <p className="text-xs sm:text-sm text-slate-700 font-bold">
                     Bahria University Islamabad
                   </p>
                   <p className="text-xs text-slate-600 font-medium">
@@ -1280,7 +1291,7 @@ export default function App() {
                 </div>
               </div>
 
-              <span className="rounded-xl border-2 border-slate-900 bg-[#faf8f5] px-4 py-2 text-xs font-mono font-black text-slate-900 shadow-[2px_2px_0px_#0f172a] whitespace-nowrap">
+              <span className="rounded-xl border-2 border-slate-900 bg-[#faf8f5] px-3 sm:px-4 py-1.5 sm:py-2 text-[11px] sm:text-xs font-mono font-black text-slate-900 shadow-[2px_2px_0px_#0f172a] whitespace-nowrap">
                 Oct 2021 – Jul 2025
               </span>
             </motion.div>
@@ -1290,7 +1301,7 @@ export default function App() {
         {/* =========================================================================
             CONTACT SECTION
         ========================================================================== */}
-        <section id="contact" className="py-24 relative">
+        <section id="contact" className="py-16 sm:py-24 relative">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <SectionHeader
               badge="Let's Connect"
@@ -1298,7 +1309,7 @@ export default function App() {
               subtitle="Open to freelance AI projects, ML engineering internships, and full-time opportunities."
             />
 
-            <div className="grid lg:grid-cols-12 gap-8 items-start">
+            <div className="grid lg:grid-cols-12 gap-6 lg:gap-8 items-start">
               {/* Left Column: Direct Info Cards with Slide Animation */}
               <motion.div
                 initial={{ opacity: 0, x: -30 }}
@@ -1307,82 +1318,82 @@ export default function App() {
                 transition={{ duration: 0.6, ease: 'easeOut' }}
                 className="lg:col-span-5 space-y-4"
               >
-                <div className="paper-card p-8 space-y-6">
+                <div className="paper-card p-5 sm:p-8 space-y-5 sm:space-y-6">
                   <div className="washi-tape washi-tape-cyan"></div>
                   
                   <AnimatedHeading
                     text="Let's Build Something Intelligent"
                     as="h3"
-                    className="text-2xl font-black text-slate-900 font-['Space_Grotesk']"
+                    className="text-xl sm:text-2xl font-black text-slate-900 font-['Space_Grotesk']"
                   />
 
-                  <p className="text-sm text-slate-700 leading-relaxed font-medium">
+                  <p className="text-xs sm:text-sm text-slate-700 leading-relaxed font-medium">
                     Whether you need a full RAG retrieval pipeline, computer vision model training, or an intelligent customer automation chatbot — let's discuss how we can execute it.
                   </p>
 
                   <div className="space-y-3 pt-2">
                     {/* Email item with copy */}
-                    <div className="flex items-center justify-between rounded-xl border-2 border-slate-900 bg-[#faf8f5] p-3.5 shadow-[2px_2px_0px_#0f172a]">
-                      <div className="flex items-center gap-3">
-                        <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-pink-100 text-pink-700 border border-pink-300">
-                          <Mail size={16} />
+                    <div className="flex items-center justify-between rounded-xl border-2 border-slate-900 bg-[#faf8f5] p-3 sm:p-3.5 shadow-[2px_2px_0px_#0f172a]">
+                      <div className="flex items-center gap-2.5 sm:gap-3 overflow-hidden">
+                        <div className="flex h-8 w-8 sm:h-9 sm:w-9 items-center justify-center rounded-lg bg-pink-100 text-pink-700 border border-pink-300 flex-shrink-0">
+                          <Mail size={15} />
                         </div>
-                        <div>
-                          <p className="text-[10px] font-mono text-slate-500 uppercase font-bold">Direct Email</p>
-                          <p className="text-xs sm:text-sm font-bold text-slate-900">maawazali111@gmail.com</p>
+                        <div className="overflow-hidden">
+                          <p className="text-[9px] sm:text-[10px] font-mono text-slate-500 uppercase font-bold">Direct Email</p>
+                          <p className="text-xs sm:text-sm font-bold text-slate-900 truncate">maawazali111@gmail.com</p>
                         </div>
                       </div>
                       <button
                         onClick={handleCopyEmail}
-                        className="rounded-lg border-2 border-slate-900 bg-white p-1.5 text-slate-900 shadow-[1px_1px_0px_#0f172a] hover:bg-slate-100 transition"
+                        className="rounded-lg border-2 border-slate-900 bg-white p-1.5 text-slate-900 shadow-[1px_1px_0px_#0f172a] hover:bg-slate-100 transition flex-shrink-0 ml-2"
                         title="Copy email"
                       >
-                        {copiedEmail ? <Check size={14} className="text-pink-600" /> : <Copy size={14} />}
+                        {copiedEmail ? <Check size={13} className="text-pink-600" /> : <Copy size={13} />}
                       </button>
                     </div>
 
                     {/* Phone item */}
-                    <div className="flex items-center gap-3 rounded-xl border-2 border-slate-900 bg-[#faf8f5] p-3.5 shadow-[2px_2px_0px_#0f172a]">
-                      <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-sky-100 text-sky-700 border border-sky-300">
-                        <Phone size={16} />
+                    <div className="flex items-center gap-2.5 sm:gap-3 rounded-xl border-2 border-slate-900 bg-[#faf8f5] p-3 sm:p-3.5 shadow-[2px_2px_0px_#0f172a]">
+                      <div className="flex h-8 w-8 sm:h-9 sm:w-9 items-center justify-center rounded-lg bg-sky-100 text-sky-700 border border-sky-300 flex-shrink-0">
+                        <Phone size={15} />
                       </div>
                       <div>
-                        <p className="text-[10px] font-mono text-slate-500 uppercase font-bold">Phone / WhatsApp</p>
+                        <p className="text-[9px] sm:text-[10px] font-mono text-slate-500 uppercase font-bold">Phone / WhatsApp</p>
                         <p className="text-xs sm:text-sm font-bold text-slate-900">+92-346-5120975</p>
                       </div>
                     </div>
 
                     {/* Location item */}
-                    <div className="flex items-center gap-3 rounded-xl border-2 border-slate-900 bg-[#faf8f5] p-3.5 shadow-[2px_2px_0px_#0f172a]">
-                      <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-purple-100 text-purple-700 border border-purple-300">
-                        <MapPin size={16} />
+                    <div className="flex items-center gap-2.5 sm:gap-3 rounded-xl border-2 border-slate-900 bg-[#faf8f5] p-3 sm:p-3.5 shadow-[2px_2px_0px_#0f172a]">
+                      <div className="flex h-8 w-8 sm:h-9 sm:w-9 items-center justify-center rounded-lg bg-purple-100 text-purple-700 border border-purple-300 flex-shrink-0">
+                        <MapPin size={15} />
                       </div>
                       <div>
-                        <p className="text-[10px] font-mono text-slate-500 uppercase font-bold">Location</p>
-                        <p className="text-xs sm:text-sm font-bold text-slate-900">Kahuta, Rawalpindi / Islamabad, Pakistan</p>
+                        <p className="text-[9px] sm:text-[10px] font-mono text-slate-500 uppercase font-bold">Location</p>
+                        <p className="text-xs sm:text-sm font-bold text-slate-900">Kahuta, Rawalpindi / Islamabad</p>
                       </div>
                     </div>
                   </div>
 
                   {/* Social Profile Links */}
-                  <div className="pt-4 border-t-2 border-slate-200 flex flex-wrap gap-3">
+                  <div className="pt-3 sm:pt-4 border-t-2 border-slate-200 flex flex-wrap gap-2.5 sm:gap-3">
                     <a
                       href="https://github.com/mwchuchu"
                       target="_blank"
                       rel="noreferrer"
-                      className="inline-flex items-center gap-2 rounded-xl border-2 border-slate-900 bg-white px-4 py-2 text-xs font-black text-slate-900 shadow-[2px_2px_0px_#0f172a] transition hover:translate-x-[-1px] hover:translate-y-[-1px]"
+                      className="inline-flex items-center gap-1.5 sm:gap-2 rounded-xl border-2 border-slate-900 bg-white px-3 sm:px-4 py-2 text-xs font-black text-slate-900 shadow-[2px_2px_0px_#0f172a] transition hover:translate-x-[-1px] hover:translate-y-[-1px]"
                     >
-                      <FaGithub size={15} />
-                      GitHub / mwchuchu
+                      <FaGithub size={14} />
+                      GitHub
                     </a>
                     <a
                       href="https://linkedin.com/in/maawaz"
                       target="_blank"
                       rel="noreferrer"
-                      className="inline-flex items-center gap-2 rounded-xl border-2 border-slate-900 bg-white px-4 py-2 text-xs font-black text-slate-900 shadow-[2px_2px_0px_#0f172a] transition hover:translate-x-[-1px] hover:translate-y-[-1px]"
+                      className="inline-flex items-center gap-1.5 sm:gap-2 rounded-xl border-2 border-slate-900 bg-white px-3 sm:px-4 py-2 text-xs font-black text-slate-900 shadow-[2px_2px_0px_#0f172a] transition hover:translate-x-[-1px] hover:translate-y-[-1px]"
                     >
-                      <FaLinkedin size={15} className="text-blue-600" />
-                      LinkedIn / in/maawaz
+                      <FaLinkedin size={14} className="text-blue-600" />
+                      LinkedIn
                     </a>
                   </div>
                 </div>
@@ -1396,68 +1407,68 @@ export default function App() {
                 transition={{ duration: 0.6, ease: 'easeOut' }}
                 className="lg:col-span-7"
               >
-                <div className="paper-card p-8 sm:p-10 space-y-6">
+                <div className="paper-card p-5 sm:p-8 md:p-10 space-y-5 sm:space-y-6">
                   <div className="space-y-1">
                     <AnimatedHeading
                       text="Send a Message"
                       as="h3"
-                      className="text-2xl font-black text-slate-900 font-['Space_Grotesk']"
+                      className="text-xl sm:text-2xl font-black text-slate-900 font-['Space_Grotesk']"
                     />
                     <p className="text-xs sm:text-sm text-slate-600 font-medium">
                       Fill out the notepad below and I'll respond within 24 hours.
                     </p>
                   </div>
 
-                  <form ref={formRef} onSubmit={handleEmailSend} className="space-y-4">
-                    <div className="grid sm:grid-cols-2 gap-4">
+                  <form ref={formRef} onSubmit={handleEmailSend} className="space-y-3.5 sm:space-y-4">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 sm:gap-4">
                       <div className="space-y-1.5">
-                        <label className="text-xs font-mono font-black text-slate-900">YOUR NAME</label>
+                        <label className="text-[11px] sm:text-xs font-mono font-black text-slate-900">YOUR NAME</label>
                         <input
                           type="text"
                           name="user_name"
                           placeholder="e.g. John Doe"
                           required
-                          className="w-full rounded-xl border-2 border-slate-900 bg-white px-4 py-3 text-sm text-slate-900 placeholder-slate-400 outline-none transition focus:shadow-[3px_3px_0px_#ff2d87]"
+                          className="w-full rounded-xl border-2 border-slate-900 bg-white px-3.5 sm:px-4 py-2.5 sm:py-3 text-xs sm:text-sm text-slate-900 placeholder-slate-400 outline-none transition focus:shadow-[3px_3px_0px_#ff2d87]"
                         />
                       </div>
                       <div className="space-y-1.5">
-                        <label className="text-xs font-mono font-black text-slate-900">YOUR EMAIL</label>
+                        <label className="text-[11px] sm:text-xs font-mono font-black text-slate-900">YOUR EMAIL</label>
                         <input
                           type="email"
                           name="user_email"
                           placeholder="e.g. john@example.com"
                           required
-                          className="w-full rounded-xl border-2 border-slate-900 bg-white px-4 py-3 text-sm text-slate-900 placeholder-slate-400 outline-none transition focus:shadow-[3px_3px_0px_#ff2d87]"
+                          className="w-full rounded-xl border-2 border-slate-900 bg-white px-3.5 sm:px-4 py-2.5 sm:py-3 text-xs sm:text-sm text-slate-900 placeholder-slate-400 outline-none transition focus:shadow-[3px_3px_0px_#ff2d87]"
                         />
                       </div>
                     </div>
 
                     <div className="space-y-1.5">
-                      <label className="text-xs font-mono font-black text-slate-900">PROJECT SUBJECT</label>
+                      <label className="text-[11px] sm:text-xs font-mono font-black text-slate-900">PROJECT SUBJECT</label>
                       <input
                         type="text"
                         name="subject"
                         placeholder="e.g. RAG Pipeline Development / ML Project"
                         required
-                        className="w-full rounded-xl border-2 border-slate-900 bg-white px-4 py-3 text-sm text-slate-900 placeholder-slate-400 outline-none transition focus:shadow-[3px_3px_0px_#8b5cf6]"
+                        className="w-full rounded-xl border-2 border-slate-900 bg-white px-3.5 sm:px-4 py-2.5 sm:py-3 text-xs sm:text-sm text-slate-900 placeholder-slate-400 outline-none transition focus:shadow-[3px_3px_0px_#8b5cf6]"
                       />
                     </div>
 
                     <div className="space-y-1.5">
-                      <label className="text-xs font-mono font-black text-slate-900">MESSAGE</label>
+                      <label className="text-[11px] sm:text-xs font-mono font-black text-slate-900">MESSAGE</label>
                       <textarea
                         name="message"
-                        rows="5"
+                        rows="4"
                         placeholder="Tell me about your project, timeline, or requirements..."
                         required
-                        className="w-full rounded-xl border-2 border-slate-900 bg-white px-4 py-3 text-sm text-slate-900 placeholder-slate-400 outline-none transition focus:shadow-[3px_3px_0px_#0284c7]"
+                        className="w-full rounded-xl border-2 border-slate-900 bg-white px-3.5 sm:px-4 py-2.5 sm:py-3 text-xs sm:text-sm text-slate-900 placeholder-slate-400 outline-none transition focus:shadow-[3px_3px_0px_#0284c7]"
                       />
                     </div>
 
                     <button
                       type="submit"
                       disabled={sending}
-                      className="inline-flex w-full items-center justify-center gap-2 rounded-xl paper-btn-primary py-3.5 text-sm font-black active:scale-95 disabled:opacity-60"
+                      className="inline-flex w-full items-center justify-center gap-2 rounded-xl paper-btn-primary py-3 sm:py-3.5 text-xs sm:text-sm font-black active:scale-95 disabled:opacity-60"
                     >
                       {sending ? (
                         <>
@@ -1465,7 +1476,7 @@ export default function App() {
                         </>
                       ) : (
                         <>
-                          <Send size={16} />
+                          <Send size={15} />
                           Send Message
                         </>
                       )}
