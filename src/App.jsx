@@ -28,7 +28,10 @@ import {
   Workflow,
   Search,
   Network,
-  Server
+  Server,
+  Gamepad2,
+  Tv,
+  Radio
 } from 'lucide-react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
@@ -143,10 +146,209 @@ const SectionHeader = ({ badge, title, subtitle }) => (
   </motion.div>
 );
 
+// Domain Theme Border & Glow Colors for Non-Black Glowing CRT Bezels
+const getScreenTheme = (groupId, activeSkill) => {
+  if (activeSkill) {
+    return {
+      border: activeSkill.color,
+      glow: `${activeSkill.color}55`,
+      shadow: activeSkill.shadow || activeSkill.color,
+      innerBorder: `${activeSkill.color}99`,
+    };
+  }
+
+  const themes = {
+    'rag-genai': {
+      border: '#ff2d87',
+      glow: 'rgba(255, 45, 135, 0.45)',
+      shadow: '#be185d',
+      innerBorder: 'rgba(255, 45, 135, 0.65)',
+    },
+    'deep-learning': {
+      border: '#a855f7',
+      glow: 'rgba(168, 85, 247, 0.45)',
+      shadow: '#7e22ce',
+      innerBorder: 'rgba(168, 85, 247, 0.65)',
+    },
+    'backend-mlops': {
+      border: '#0ea5e9',
+      glow: 'rgba(14, 165, 233, 0.45)',
+      shadow: '#0284c7',
+      innerBorder: 'rgba(14, 165, 233, 0.65)',
+    },
+    'data-fullstack': {
+      border: '#10b981',
+      glow: 'rgba(16, 185, 129, 0.45)',
+      shadow: '#059669',
+      innerBorder: 'rgba(16, 185, 129, 0.65)',
+    },
+  };
+
+  return (
+    themes[groupId] || {
+      border: '#06b6d4',
+      glow: 'rgba(6, 182, 212, 0.45)',
+      shadow: '#0284c7',
+      innerBorder: 'rgba(6, 182, 212, 0.65)',
+    }
+  );
+};
+
+// Retro Gaming CRT Elevated Screen with Live Typewriter Effect & Colored Boundary
+const TypewriterGamingScreen = ({ group, activeSkill, onReset, groupIdx }) => {
+  const [displayText, setDisplayText] = useState('');
+  const [isTyping, setIsTyping] = useState(false);
+  const targetText = activeSkill ? activeSkill.spec : group.description;
+  const channelId = `0${groupIdx + 1}`;
+  const theme = getScreenTheme(group.id, activeSkill);
+
+  useEffect(() => {
+    let index = 0;
+    setDisplayText('');
+    setIsTyping(true);
+
+    const speed = 12; // Snappy retro terminal typing
+    const timer = setInterval(() => {
+      index++;
+      if (index <= targetText.length) {
+        setDisplayText(targetText.slice(0, index));
+      } else {
+        setIsTyping(false);
+        clearInterval(timer);
+      }
+    }, speed);
+
+    return () => clearInterval(timer);
+  }, [targetText]);
+
+  return (
+    <div
+      style={{
+        '--screen-border': theme.border,
+        '--screen-glow': theme.glow,
+        '--screen-shadow': theme.shadow,
+        '--screen-inner-border': theme.innerBorder,
+      }}
+      className="crt-chassis rounded-2xl p-1 sm:p-1.5 relative select-none"
+    >
+      <div
+        style={{
+          borderColor: theme.innerBorder,
+        }}
+        className="crt-monitor rounded-xl p-4 sm:p-5 relative shadow-[inset_0_3px_20px_rgba(0,0,0,0.98)] overflow-hidden"
+      >
+        {/* Scanlines & Glare Light Reflection */}
+        <div className="crt-scanlines" />
+        <div className="crt-glare" />
+
+        {/* CRT Gaming Header HUD */}
+        <div
+          style={{ borderColor: `${theme.border}40` }}
+          className="relative z-10 flex items-center justify-between gap-2 border-b pb-2.5 mb-3"
+        >
+          <div className="flex items-center gap-2">
+            <span className="flex items-center gap-1.5 px-2 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/40 text-[10px] font-mono font-bold text-emerald-400 tracking-wider">
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping inline-block" />
+              [1P] CH.{channelId} // {activeSkill ? 'KEY_ENGAGED' : 'ONLINE'}
+            </span>
+            <span className="hidden sm:inline-block text-[9.5px] font-mono text-slate-400 tracking-tight">
+              CRT RGB • 60FPS
+            </span>
+          </div>
+
+          <div className="flex items-center gap-2">
+            {activeSkill && (
+              <button
+                type="button"
+                onClick={onReset}
+                className="text-[9px] font-mono text-emerald-300 hover:text-white bg-emerald-950/70 hover:bg-emerald-900/80 px-2 py-0.5 rounded border border-emerald-500/50 transition-colors"
+                title="Reset to category overview"
+              >
+                [RESET]
+              </button>
+            )}
+            <span
+              style={{
+                borderColor: `${theme.border}90`,
+                backgroundColor: `${theme.border}20`,
+                color: theme.border,
+                boxShadow: `0 0 10px ${theme.border}40`,
+              }}
+              className="rounded-md border px-2.5 py-0.5 text-[9.5px] font-mono font-black tracking-wider uppercase"
+            >
+              ★ {activeSkill ? `${activeSkill.name} • ${activeSkill.level}` : group.badge}
+            </span>
+          </div>
+        </div>
+
+        {/* Screen Main Content */}
+        <div className="relative z-10 space-y-2.5">
+          <div className="flex items-center gap-3">
+            <div
+              className="flex h-9 w-9 items-center justify-center rounded-lg border shadow-[0_0_12px_rgba(34,211,238,0.35)] shrink-0 transition-all duration-300"
+              style={{
+                borderColor: theme.border,
+                backgroundColor: 'rgba(8, 14, 26, 0.9)',
+                color: theme.border,
+                boxShadow: `0 0 12px ${theme.glow}`,
+              }}
+            >
+              {activeSkill ? (
+                activeSkill.isFa ? (
+                  <FontAwesomeIcon icon={activeSkill.icon} size="sm" />
+                ) : (
+                  <activeSkill.icon size={18} />
+                )
+              ) : (
+                <group.icon size={18} />
+              )}
+            </div>
+            <div>
+              <h3 className="text-base sm:text-lg font-black text-white font-['Space_Grotesk'] tracking-tight drop-shadow-[0_0_10px_rgba(255,255,255,0.25)]">
+                {activeSkill ? activeSkill.name : group.title}
+              </h3>
+              <p
+                style={{ color: theme.border }}
+                className="text-[10px] font-mono opacity-90"
+              >
+                {activeSkill
+                  ? `[ACTIVE_KEYCAP] // PROFICIENCY: ${activeSkill.level.toUpperCase()}`
+                  : `SYSTEM DOMAIN // STAGE ${channelId}`}
+              </p>
+            </div>
+          </div>
+
+          {/* Typewriter Terminal Display */}
+          <div
+            style={{ borderColor: `${theme.border}35` }}
+            className="bg-black/65 border rounded-lg p-2.5 text-xs text-slate-300 font-mono leading-relaxed shadow-inner min-h-[58px] flex items-start"
+          >
+            <p className="flex-1 text-emerald-300/90">
+              <span
+                style={{ color: theme.border }}
+                className="font-bold mr-1.5"
+              >
+                &gt; {activeSkill ? 'TECH_SPEC:' : 'MISSION_LOG:'}
+              </span>
+              <span className="text-slate-100 font-mono">{displayText}</span>
+              <span
+                className={`inline-block w-2 h-3.5 bg-emerald-400 ml-1 align-middle ${
+                  isTyping ? 'opacity-100' : 'animate-pulse'
+                }`}
+              />
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
 export default function App() {
   const [copiedEmail, setCopiedEmail] = useState(false);
   const [projectFilter, setProjectFilter] = useState('All');
   const [hasEntered, setHasEntered] = useState(false);
+  const [activeSkillsByGroup, setActiveSkillsByGroup] = useState({});
 
   // Cinematic Hero Scroll / Click Dive-In Trigger
   useEffect(() => {
@@ -191,6 +393,34 @@ export default function App() {
   const formRef = useRef(null);
   const [sending, setSending] = useState(false);
   const [statusMessage, setStatusMessage] = useState({ type: '', text: '' });
+
+  // Mechanical Keyboard Switch Click Synthesizer (Web Audio API)
+  const playKeyClick = () => {
+    try {
+      const AudioCtx = window.AudioContext || window.webkitAudioContext;
+      if (!AudioCtx) return;
+      const ctx = new AudioCtx();
+      
+      // High-frequency tactile switch transient
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      
+      osc.type = 'triangle';
+      osc.frequency.setValueAtTime(1400, ctx.currentTime);
+      osc.frequency.exponentialRampToValueAtTime(200, ctx.currentTime + 0.035);
+      
+      gain.gain.setValueAtTime(0.12, ctx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.035);
+      
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+      
+      osc.start();
+      osc.stop(ctx.currentTime + 0.035);
+    } catch (e) {
+      // Audio policy safe
+    }
+  };
 
   const handleCopyEmail = () => {
     navigator.clipboard.writeText('maawazali111@gmail.com');
@@ -282,7 +512,7 @@ export default function App() {
     },
   ];
 
-  // Bento Skills with Distinct Vibrant Color Palettes
+  // Bento Skills with Distinct Vibrant Color Palettes and Technical Specs
   const bentoSkills = [
     {
       id: 'rag-genai',
@@ -292,14 +522,14 @@ export default function App() {
       description: 'End-to-end generative AI systems, semantic vector search, prompt tuning, and real-time knowledge retrieval.',
       icon: Bot,
       skills: [
-        { name: 'RAG Pipelines', level: 'Expert', icon: Search, color: '#ff2d87', bg: '#fff0f6', shadow: '#ff2d87', badgeClass: 'bg-pink-100 text-pink-800' },
-        { name: 'FAISS Vector DB', level: 'Expert', icon: Database, color: '#0284c7', bg: '#f0f9ff', shadow: '#0284c7', badgeClass: 'bg-sky-100 text-sky-800' },
-        { name: 'LLMs & Prompting', level: 'Advanced', icon: Bot, color: '#8b5cf6', bg: '#f5f3ff', shadow: '#8b5cf6', badgeClass: 'bg-purple-100 text-purple-800' },
-        { name: 'Transformers', level: 'Advanced', icon: Workflow, color: '#d97706', bg: '#fffbeb', shadow: '#d97706', badgeClass: 'bg-amber-100 text-amber-800' },
-        { name: 'Embeddings', level: 'Advanced', icon: Network, color: '#6366f1', bg: '#eef2ff', shadow: '#6366f1', badgeClass: 'bg-indigo-100 text-indigo-800' },
-        { name: 'Sentence Transformers', level: 'Advanced', icon: Brain, color: '#059669', bg: '#ecfdf5', shadow: '#059669', badgeClass: 'bg-emerald-100 text-emerald-800' },
-        { name: 'Gemini API 1.5', level: 'Expert', icon: SiGoogle, color: '#2563eb', bg: '#eff6ff', shadow: '#2563eb', badgeClass: 'bg-blue-100 text-blue-800' },
-        { name: 'Claude 101 & MCP', level: 'Certified', icon: SiAnthropic, color: '#ea580c', bg: '#fff7ed', shadow: '#ea580c', badgeClass: 'bg-orange-100 text-orange-800' },
+        { name: 'RAG Pipelines', level: 'Expert', icon: Search, color: '#ff2d87', bg: '#fff0f6', shadow: '#ff2d87', badgeClass: 'bg-pink-100 text-pink-800', spec: 'End-to-end multi-document RAG pipelines with semantic chunking, context reranking, and citation metadata generation.' },
+        { name: 'FAISS Vector DB', level: 'Expert', icon: Database, color: '#0284c7', bg: '#f0f9ff', shadow: '#0284c7', badgeClass: 'bg-sky-100 text-sky-800', spec: 'Dense vector indexing with IndexFlatL2 & HNSW graphs for ultra-fast sub-50ms semantic similarity queries.' },
+        { name: 'LLMs & Prompting', level: 'Advanced', icon: Bot, color: '#8b5cf6', bg: '#f5f3ff', shadow: '#8b5cf6', badgeClass: 'bg-purple-100 text-purple-800', spec: 'Few-shot prompting, structured JSON schema output enforcement, system guardrails, and hallucination reduction.' },
+        { name: 'Transformers', level: 'Advanced', icon: Workflow, color: '#d97706', bg: '#fffbeb', shadow: '#d97706', badgeClass: 'bg-amber-100 text-amber-800', spec: 'HuggingFace model pipelines, BERT & RoBERTa sequence classification, cross-encoders, and token embeddings.' },
+        { name: 'Embeddings', level: 'Advanced', icon: Network, color: '#6366f1', bg: '#eef2ff', shadow: '#6366f1', badgeClass: 'bg-indigo-100 text-indigo-800', spec: 'Dense semantic representations, cosine similarity metric spaces, contrastive learning, and embedding caching.' },
+        { name: 'Sentence Transformers', level: 'Advanced', icon: Brain, color: '#059669', bg: '#ecfdf5', shadow: '#059669', badgeClass: 'bg-emerald-100 text-emerald-800', spec: 'Fine-tuning all-MiniLM-L6-v2 and multi-qa models for domain-specific conversational document retrieval.' },
+        { name: 'Gemini API 1.5', level: 'Expert', icon: SiGoogle, color: '#2563eb', bg: '#eff6ff', shadow: '#2563eb', badgeClass: 'bg-blue-100 text-blue-800', spec: 'Multimodal vision & audio reasoning, 1M+ context window ingestion, tool calling, and high-speed Flash endpoints.' },
+        { name: 'Claude 101 & MCP', level: 'Certified', icon: SiAnthropic, color: '#ea580c', bg: '#fff7ed', shadow: '#ea580c', badgeClass: 'bg-orange-100 text-orange-800', spec: 'Certified Anthropic Claude Model Context Protocol integrations for autonomous agent tooling & workflows.' },
       ],
     },
     {
@@ -310,14 +540,14 @@ export default function App() {
       description: 'Supervised & unsupervised model engineering, deep convolutional networks, transfer learning, and sequence modeling.',
       icon: Cpu,
       skills: [
-        { name: 'PyTorch', level: 'Advanced', icon: SiPytorch, color: '#ee4c2c', bg: '#fff5f2', shadow: '#ee4c2c', badgeClass: 'bg-orange-100 text-orange-900' },
-        { name: 'TensorFlow', level: 'Advanced', icon: SiTensorflow, color: '#ff6f00', bg: '#fff8f0', shadow: '#ff6f00', badgeClass: 'bg-amber-100 text-amber-900' },
-        { name: 'Scikit-learn', level: 'Expert', icon: SiScikitlearn, color: '#0284c7', bg: '#f0f9ff', shadow: '#0284c7', badgeClass: 'bg-sky-100 text-sky-900' },
-        { name: 'Computer Vision', level: 'Advanced', icon: Cpu, color: '#0d9488', bg: '#f0fdfa', shadow: '#0d9488', badgeClass: 'bg-teal-100 text-teal-900' },
-        { name: 'Transfer Learning', level: 'Advanced', icon: Layers, color: '#7c3aed', bg: '#f5f3ff', shadow: '#7c3aed', badgeClass: 'bg-violet-100 text-violet-900' },
-        { name: 'LSTM & Bi-LSTM', level: 'Advanced', icon: Brain, color: '#db2777', bg: '#fdf2f8', shadow: '#db2777', badgeClass: 'bg-pink-100 text-pink-900' },
-        { name: 'Model Evaluation', level: 'Expert', icon: CheckCircle2, color: '#16a34a', bg: '#f0fdf4', shadow: '#16a34a', badgeClass: 'bg-green-100 text-green-900' },
-        { name: 'Pandas & NumPy', level: 'Expert', icon: SiPandas, color: '#4338ca', bg: '#eef2ff', shadow: '#4338ca', badgeClass: 'bg-indigo-100 text-indigo-900' },
+        { name: 'PyTorch', level: 'Advanced', icon: SiPytorch, color: '#ee4c2c', bg: '#fff5f2', shadow: '#ee4c2c', badgeClass: 'bg-orange-100 text-orange-900', spec: 'Custom deep neural architectures, Autograd computation graphs, CUDA GPU acceleration, and DataLoader pipelines.' },
+        { name: 'TensorFlow', level: 'Advanced', icon: SiTensorflow, color: '#ff6f00', bg: '#fff8f0', shadow: '#ff6f00', badgeClass: 'bg-amber-100 text-amber-900', spec: 'Keras sequential/functional networks, SavedModel serialization, distributed training, and TF Lite export.' },
+        { name: 'Scikit-learn', level: 'Expert', icon: SiScikitlearn, color: '#0284c7', bg: '#f0f9ff', shadow: '#0284c7', badgeClass: 'bg-sky-100 text-sky-900', spec: 'Random Forests, XGBoost, SVMs, hyperparameter tuning via GridSearchCV, and cross-validation evaluation.' },
+        { name: 'Computer Vision', level: 'Advanced', icon: Cpu, color: '#0d9488', bg: '#f0fdfa', shadow: '#0d9488', badgeClass: 'bg-teal-100 text-teal-900', spec: 'Image classification, feature extraction, OpenCV real-time video stream processing, and bounding-box detection.' },
+        { name: 'Transfer Learning', level: 'Advanced', icon: Layers, color: '#7c3aed', bg: '#f5f3ff', shadow: '#7c3aed', badgeClass: 'bg-violet-100 text-violet-900', spec: 'Fine-tuning pretrained ResNet101, MobileNetV2, and EfficientNet backbones achieving 90%+ target domain accuracy.' },
+        { name: 'LSTM & Bi-LSTM', level: 'Advanced', icon: Brain, color: '#db2777', bg: '#fdf2f8', shadow: '#db2777', badgeClass: 'bg-pink-100 text-pink-900', spec: 'Recurrent sequence modeling for temporal time-series forecasting, NLP sentiment tagging, and text generation.' },
+        { name: 'Model Evaluation', level: 'Expert', icon: CheckCircle2, color: '#16a34a', bg: '#f0fdf4', shadow: '#16a34a', badgeClass: 'bg-green-100 text-green-900', spec: 'Precision-Recall trade-offs, ROC-AUC metric optimization, confusion matrices, and model drift monitoring.' },
+        { name: 'Pandas & NumPy', level: 'Expert', icon: SiPandas, color: '#4338ca', bg: '#eef2ff', shadow: '#4338ca', badgeClass: 'bg-indigo-100 text-indigo-900', spec: 'High-speed vectorized matrix computations, dataset cleaning, feature aggregation, and structured ETL workflows.' },
       ],
     },
     {
@@ -328,14 +558,14 @@ export default function App() {
       description: 'Building low-latency model inference endpoints, asynchronous queue workers, and containerized deployments.',
       icon: Server,
       skills: [
-        { name: 'FastAPI', level: 'Expert', icon: SiFastapi, color: '#009688', bg: '#f0fdfa', shadow: '#009688', badgeClass: 'bg-teal-100 text-teal-900' },
-        { name: 'Flask', level: 'Advanced', icon: SiFlask, color: '#334155', bg: '#f8fafc', shadow: '#334155', badgeClass: 'bg-slate-200 text-slate-900' },
-        { name: 'Celery Workers', level: 'Advanced', icon: Zap, color: '#65a30d', bg: '#f7fee7', shadow: '#65a30d', badgeClass: 'bg-lime-100 text-lime-900' },
-        { name: 'REST API Design', level: 'Expert', icon: Terminal, color: '#9333ea', bg: '#faf5ff', shadow: '#9333ea', badgeClass: 'bg-purple-100 text-purple-900' },
-        { name: 'Docker', level: 'Advanced', icon: faDocker, isFa: true, color: '#2496ed', bg: '#f0f9ff', shadow: '#2496ed', badgeClass: 'bg-sky-100 text-sky-900' },
-        { name: 'ML Pipelines', level: 'Advanced', icon: Layers, color: '#e11d48', bg: '#fff1f2', shadow: '#e11d48', badgeClass: 'bg-rose-100 text-rose-900' },
-        { name: 'Python', level: 'Expert', icon: faPython, isFa: true, color: '#3776ab', bg: '#eff6ff', shadow: '#3776ab', badgeClass: 'bg-blue-100 text-blue-900' },
-        { name: 'Git & CI/CD', level: 'Expert', icon: faDocker, isFa: true, color: '#f05032', bg: '#fff5f3', shadow: '#f05032', badgeClass: 'bg-orange-100 text-orange-900' },
+        { name: 'FastAPI', level: 'Expert', icon: SiFastapi, color: '#009688', bg: '#f0fdfa', shadow: '#009688', badgeClass: 'bg-teal-100 text-teal-900', spec: 'Asynchronous high-throughput ASGI microservices, Pydantic v2 data validation, and OpenAPI documentation.' },
+        { name: 'Flask', level: 'Advanced', icon: SiFlask, color: '#334155', bg: '#f8fafc', shadow: '#334155', badgeClass: 'bg-slate-200 text-slate-900', spec: 'Lightweight WSGI model serving microservices, custom routing middlewares, and automated integration test suites.' },
+        { name: 'Celery Workers', level: 'Advanced', icon: Zap, color: '#65a30d', bg: '#f7fee7', shadow: '#65a30d', badgeClass: 'bg-lime-100 text-lime-900', spec: 'Distributed background job processing, Redis broker queue orchestration, and long-running ML task offloading.' },
+        { name: 'REST API Design', level: 'Expert', icon: Terminal, color: '#9333ea', bg: '#faf5ff', shadow: '#9333ea', badgeClass: 'bg-purple-100 text-purple-900', spec: 'RESTful architecture, JWT token authorization, rate limiting, request throttling, and unified error handling.' },
+        { name: 'Docker', level: 'Advanced', icon: faDocker, isFa: true, color: '#2496ed', bg: '#f0f9ff', shadow: '#2496ed', badgeClass: 'bg-sky-100 text-sky-900', spec: 'Multi-stage Docker builds, slim Python container images, docker-compose orchestration, and isolated environments.' },
+        { name: 'ML Pipelines', level: 'Advanced', icon: Layers, color: '#e11d48', bg: '#fff1f2', shadow: '#e11d48', badgeClass: 'bg-rose-100 text-rose-900', spec: 'Automated data preprocessing pipelines, model artifact versioning, CI triggers, and inference endpoint deployment.' },
+        { name: 'Python', level: 'Expert', icon: faPython, isFa: true, color: '#3776ab', bg: '#eff6ff', shadow: '#3776ab', badgeClass: 'bg-blue-100 text-blue-900', spec: 'Advanced asynchronous programming (asyncio), OOP architecture, type annotations, and performance optimization.' },
+        { name: 'Git & CI/CD', level: 'Expert', icon: faDocker, isFa: true, color: '#f05032', bg: '#fff5f3', shadow: '#f05032', badgeClass: 'bg-orange-100 text-orange-900', spec: 'Git version control, GitHub Actions test suites, automated linters, and continuous deployment workflows.' },
       ],
     },
     {
@@ -346,14 +576,14 @@ export default function App() {
       description: 'Data persistence layers, interactive reactive web dashboards, and mobile user interfaces.',
       icon: Database,
       skills: [
-        { name: 'MongoDB', level: 'Advanced', icon: SiMongodb, color: '#10b981', bg: '#ecfdf5', shadow: '#10b981', badgeClass: 'bg-emerald-100 text-emerald-900' },
-        { name: 'PostgreSQL & SQL', level: 'Advanced', icon: SiPostgresql, color: '#336791', bg: '#f0f7ff', shadow: '#336791', badgeClass: 'bg-sky-100 text-sky-900' },
-        { name: 'Redis Cache', level: 'Intermediate', icon: SiRedis, color: '#dc2626', bg: '#fef2f2', shadow: '#dc2626', badgeClass: 'bg-red-100 text-red-900' },
-        { name: 'React', level: 'Advanced', icon: faReact, isFa: true, color: '#06b6d4', bg: '#ecfeff', shadow: '#06b6d4', badgeClass: 'bg-cyan-100 text-cyan-900' },
-        { name: 'React Native', level: 'Intermediate', icon: faReact, isFa: true, color: '#6366f1', bg: '#eef2ff', shadow: '#6366f1', badgeClass: 'bg-indigo-100 text-indigo-900' },
-        { name: 'JavaScript', level: 'Advanced', icon: faJsSquare, isFa: true, color: '#ca8a04', bg: '#fefce8', shadow: '#ca8a04', badgeClass: 'bg-yellow-100 text-yellow-900' },
-        { name: 'C++', level: 'Intermediate', icon: SiCplusplus, color: '#00599c', bg: '#f0f6ff', shadow: '#00599c', badgeClass: 'bg-blue-100 text-blue-900' },
-        { name: 'VS Code & Postman', level: 'Expert', icon: Terminal, color: '#ea580c', bg: '#fff7ed', shadow: '#ea580c', badgeClass: 'bg-orange-100 text-orange-900' },
+        { name: 'MongoDB', level: 'Advanced', icon: SiMongodb, color: '#10b981', bg: '#ecfdf5', shadow: '#10b981', badgeClass: 'bg-emerald-100 text-emerald-900', spec: 'NoSQL document schemas, aggregation pipelines, dynamic indexing, and resilient replica set connection handling.' },
+        { name: 'PostgreSQL & SQL', level: 'Advanced', icon: SiPostgresql, color: '#336791', bg: '#f0f7ff', shadow: '#336791', badgeClass: 'bg-sky-100 text-sky-900', spec: 'Relational data modeling, ACID transactions, complex JOIN queries, index tuning, and SQLAlchemy ORM bindings.' },
+        { name: 'Redis Cache', level: 'Intermediate', icon: SiRedis, color: '#dc2626', bg: '#fef2f2', shadow: '#dc2626', badgeClass: 'bg-red-100 text-red-900', spec: 'In-memory key-value caching, Pub/Sub messaging, session persistence, and Celery task broker storage.' },
+        { name: 'React', level: 'Advanced', icon: faReact, isFa: true, color: '#06b6d4', bg: '#ecfeff', shadow: '#06b6d4', badgeClass: 'bg-cyan-100 text-cyan-900', spec: 'Interactive reactive single-page applications, custom React hooks, Tailwind CSS design system, and SPA state.' },
+        { name: 'React Native', level: 'Intermediate', icon: faReact, isFa: true, color: '#6366f1', bg: '#eef2ff', shadow: '#6366f1', badgeClass: 'bg-indigo-100 text-indigo-900', spec: 'Cross-platform mobile UI engineering for Android & iOS, state management, and backend REST API syncing.' },
+        { name: 'JavaScript', level: 'Advanced', icon: faJsSquare, isFa: true, color: '#ca8a04', bg: '#fefce8', shadow: '#ca8a04', badgeClass: 'bg-yellow-100 text-yellow-900', spec: 'Modern ES6+ syntax, asynchronous event loop, promises, Web APIs, DOM manipulation, and interactive animations.' },
+        { name: 'C++', level: 'Intermediate', icon: SiCplusplus, color: '#00599c', bg: '#f0f6ff', shadow: '#00599c', badgeClass: 'bg-blue-100 text-blue-900', spec: 'Object-oriented software design, standard template library (STL), algorithmic efficiency, and memory management.' },
+        { name: 'VS Code & Postman', level: 'Expert', icon: Terminal, color: '#ea580c', bg: '#fff7ed', shadow: '#ea580c', badgeClass: 'bg-orange-100 text-orange-900', spec: 'Modern developer workflow, automated API collection testing, environment variables, and debugging suites.' },
       ],
     },
   ];
@@ -821,14 +1051,14 @@ export default function App() {
               subtitle="Specialized in building robust, end-to-end intelligent systems that solve real-world problems."
             />
 
-            <div className="grid lg:grid-cols-12 gap-8 items-stretch">
+            <div className="max-w-4xl mx-auto">
               {/* Bio Card with Spring Entry */}
               <motion.div
-                initial={{ opacity: 0, x: -35 }}
-                whileInView={{ opacity: 1, x: 0 }}
+                initial={{ opacity: 0, y: 30, scale: 0.98 }}
+                whileInView={{ opacity: 1, y: 0, scale: 1 }}
                 viewport={{ once: true, margin: '-50px' }}
                 transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-                className="lg:col-span-5 paper-card p-8 flex flex-col justify-between space-y-6"
+                className="paper-card p-8 sm:p-10 flex flex-col justify-between space-y-6 relative"
               >
                 <div className="washi-tape washi-tape-purple"></div>
                 <div className="space-y-4">
@@ -840,73 +1070,38 @@ export default function App() {
                   <AnimatedHeading
                     text="Bridging Machine Learning & Full-Stack Backend"
                     as="h3"
-                    className="text-2xl font-black text-slate-900 font-['Space_Grotesk']"
+                    className="text-2xl sm:text-3xl font-black text-slate-900 font-['Space_Grotesk']"
                   />
 
-                  <p className="text-sm text-slate-700 leading-relaxed font-medium">
+                  <p className="text-sm sm:text-base text-slate-700 leading-relaxed font-medium">
                     I am a Computer Science graduate specialized in Machine Learning, Artificial Intelligence, and Natural Language Processing.
                   </p>
-                  <p className="text-sm text-slate-700 leading-relaxed font-medium">
+                  <p className="text-sm sm:text-base text-slate-700 leading-relaxed font-medium">
                     Experienced in building end-to-end AI systems including RAG pipelines, vector database search systems, and intelligent chatbot applications. Strong focus on scalable backend systems, applied ML models, and production-ready AI solutions.
                   </p>
                 </div>
 
-                <div className="pt-4 border-t-2 border-slate-200 space-y-2.5">
-                  <div className="flex items-center justify-between text-xs font-mono">
-                    <span className="text-slate-500 font-bold">Location</span>
-                    <span className="text-slate-900 font-bold">Kahuta, Rawalpindi, Pakistan</span>
+                <div className="pt-6 border-t-2 border-slate-200 grid sm:grid-cols-3 gap-4 text-xs font-mono">
+                  <div className="bg-slate-50 p-3 rounded-lg border border-slate-200 space-y-1">
+                    <span className="text-slate-500 font-bold block">Location</span>
+                    <span className="text-slate-900 font-bold block">Kahuta, Rawalpindi, Pakistan</span>
                   </div>
-                  <div className="flex items-center justify-between text-xs font-mono">
-                    <span className="text-slate-500 font-bold">Education</span>
-                    <span className="text-slate-900 font-bold">BS Computer Science (Bahria Univ)</span>
+                  <div className="bg-slate-50 p-3 rounded-lg border border-slate-200 space-y-1">
+                    <span className="text-slate-500 font-bold block">Education</span>
+                    <span className="text-slate-900 font-bold block">BS Computer Science (Bahria Univ)</span>
                   </div>
-                  <div className="flex items-center justify-between text-xs font-mono">
-                    <span className="text-slate-500 font-bold">Core Focus</span>
-                    <span className="text-pink-600 font-black">RAG, LLMs, PyTorch, FastAPI</span>
+                  <div className="bg-pink-50/70 p-3 rounded-lg border border-pink-200 space-y-1">
+                    <span className="text-pink-600 font-bold block">Core Focus</span>
+                    <span className="text-pink-700 font-black block">RAG, LLMs, PyTorch, FastAPI</span>
                   </div>
                 </div>
               </motion.div>
-
-              {/* 4 Pillars Grid with Staggered Entrance */}
-              <div className="lg:col-span-7 grid sm:grid-cols-2 gap-4">
-                {pillars.map((pillar, idx) => {
-                  const Icon = pillar.icon;
-                  return (
-                    <motion.div
-                      key={idx}
-                      initial={{ opacity: 0, y: 30, scale: 0.95 }}
-                      whileInView={{ opacity: 1, y: 0, scale: 1 }}
-                      viewport={{ once: true, margin: '-40px' }}
-                      transition={{ duration: 0.5, delay: idx * 0.1, ease: 'easeOut' }}
-                      whileHover={{ y: -4, scale: 1.02 }}
-                      className="paper-card p-6 flex flex-col justify-between space-y-4"
-                    >
-                      <div className="space-y-3">
-                        <div className="flex items-center justify-between">
-                          <div className="flex h-11 w-11 items-center justify-center rounded-xl border-2 border-slate-900 bg-slate-900 text-white shadow-[2px_2px_0px_#ff2d87]">
-                            <Icon size={20} />
-                          </div>
-                          <span className={`rounded-md border px-2 py-0.5 text-[10px] font-mono font-bold ${pillar.stampColor}`}>
-                            {pillar.stamp}
-                          </span>
-                        </div>
-                        <h4 className="text-lg font-black text-slate-900 font-['Space_Grotesk']">
-                          {pillar.title}
-                        </h4>
-                        <p className="text-xs sm:text-sm text-slate-600 leading-relaxed font-medium">
-                          {pillar.desc}
-                        </p>
-                      </div>
-                    </motion.div>
-                  );
-                })}
-              </div>
             </div>
           </div>
         </section>
 
         {/* =========================================================================
-            SKILLS / TECHNICAL ARSENAL (ROUGH PAPER BENTO MATRIX)
+            SKILLS / TECHNICAL ARSENAL (RETRO GAMING SCREEN & MECHANICAL KEYCAPS)
         ========================================================================== */}
         <section id="skills" className="py-24 relative bg-white border-y-2 border-slate-900">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -916,10 +1111,12 @@ export default function App() {
               subtitle="A structured domain breakdown of core machine learning libraries, LLM frameworks, vector stores, and backend infrastructure."
             />
 
-            {/* Bento Tech Hub Cards with Staggered Slide In */}
-            <div className="grid md:grid-cols-2 gap-6">
+            {/* Bento Tech Hub Cards with Retro Gaming CRT Screen + Mechanical Keyboard Buttons */}
+            <div className="grid lg:grid-cols-2 gap-7">
               {bentoSkills.map((group, groupIdx) => {
                 const HeaderIcon = group.icon;
+                const channelId = `0${groupIdx + 1}`;
+
                 return (
                   <motion.div
                     key={group.id}
@@ -928,64 +1125,132 @@ export default function App() {
                     viewport={{ once: true, margin: '-50px' }}
                     transition={{ duration: 0.6, delay: groupIdx * 0.12, ease: [0.22, 1, 0.36, 1] }}
                     whileHover={{ y: -4 }}
-                    className="paper-card p-7 flex flex-col justify-between space-y-6"
+                    className="paper-card p-5 sm:p-6 flex flex-col justify-between space-y-5 bg-[#fdfcfa] border-3 border-slate-900 shadow-[6px_6px_0px_#0f172a] rounded-2xl relative overflow-hidden"
                   >
-                    {/* Bento Header */}
-                    <div className="space-y-3">
-                      <div className="flex items-center justify-between">
-                        <div className="flex items-center gap-3">
-                          <div className="flex h-10 w-10 items-center justify-center rounded-xl border-2 border-slate-900 bg-slate-900 text-white shadow-[2px_2px_0px_#ff2d87]">
-                            <HeaderIcon size={20} />
-                          </div>
-                          <h3 className="text-lg font-black text-slate-900 font-['Space_Grotesk']">
-                            {group.title}
-                          </h3>
-                        </div>
-                        <span className={`rounded-lg border-2 px-3 py-0.5 text-[11px] font-mono font-black ${group.badgeColor}`}>
-                          {group.badge}
-                        </span>
+                    {/* Hardware Top Corner Screws & Deck Accents */}
+                    <div className="flex items-center justify-between px-1 text-slate-500">
+                      <div className="flex items-center gap-1.5 opacity-70">
+                        <div className="w-3 h-3 rounded-full border border-slate-400 bg-slate-200 flex items-center justify-center text-[7px] font-mono text-slate-600 font-bold">+</div>
+                        <span className="text-[9px] font-mono font-bold tracking-widest text-slate-600 uppercase">SYS.0{groupIdx + 1} // ARCADE</span>
                       </div>
-                      <p className="text-xs text-slate-600 leading-relaxed font-medium">
-                        {group.description}
-                      </p>
+                      <div className="flex items-center gap-2">
+                        <div className="flex items-center gap-1 bg-emerald-100/80 px-2 py-0.5 rounded border border-emerald-300">
+                          <span className="inline-block w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse shadow-[0_0_6px_#10b981]" />
+                          <span className="text-[8.5px] font-mono font-black text-emerald-800 tracking-wider">PWR ON</span>
+                        </div>
+                        <div className="w-3 h-3 rounded-full border border-slate-400 bg-slate-200 flex items-center justify-center text-[7px] font-mono text-slate-600 font-bold">+</div>
+                      </div>
                     </div>
 
-                    {/* Compact Interactive Skill Chips with Distinct Vibrant Colors */}
-                    <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5 pt-3 border-t-2 border-slate-100">
-                      {group.skills.map((skill) => {
-                        const Icon = skill.icon;
-                        return (
-                          <div
-                            key={skill.name}
-                            style={{
-                              backgroundColor: skill.bg || '#faf8f5',
-                              boxShadow: `3px 3px 0px ${skill.shadow || '#0f172a'}`,
-                            }}
-                            className="flex flex-col items-center justify-center gap-1.5 rounded-xl border-2 border-slate-900 p-2.5 text-center transition-all duration-200 hover:translate-x-[-1px] hover:translate-y-[-1px] hover:scale-[1.03] group cursor-default"
-                          >
-                            <div
-                              className="flex h-7 w-7 items-center justify-center rounded-lg border border-slate-900/15 bg-white/90 shadow-[1px_1px_0px_#0f172a] transition-transform group-hover:scale-110"
-                              style={{ color: skill.color }}
-                            >
-                              {skill.isFa ? (
-                                <FontAwesomeIcon icon={Icon} size="sm" />
-                              ) : (
-                                <Icon size={16} />
-                              )}
-                            </div>
-                            <span className="text-[11px] sm:text-xs font-black text-slate-900 leading-tight">
-                              {skill.name}
-                            </span>
-                            <span
-                              className={`text-[8px] sm:text-[9px] font-mono font-black uppercase px-1.5 py-0.5 rounded border border-slate-900/20 ${
-                                skill.badgeClass || 'bg-white/80 text-slate-700'
+                    {/* =========================================================================
+                        OLD GAMING VIBE CRT ELEVATED SCREEN (TYPEWRITER SPEC DISPLAY)
+                    ========================================================================== */}
+                    <TypewriterGamingScreen
+                      group={group}
+                      groupIdx={groupIdx}
+                      activeSkill={activeSkillsByGroup[group.id] || null}
+                      onReset={() => setActiveSkillsByGroup((prev) => ({ ...prev, [group.id]: null }))}
+                    />
+
+                    {/* =========================================================================
+                        MECHANICAL KEYBOARD INPUT DECK (TECHNOLOGY KEYCAP BUTTONS)
+                    ========================================================================== */}
+                    <div className="keyboard-deck p-3 sm:p-4 rounded-xl border-2 border-slate-900 shadow-sm">
+                      {/* Deck Header Bar */}
+                      <div className="flex items-center justify-between mb-3 px-1">
+                        <div className="flex items-center gap-2">
+                          <Gamepad2 size={15} className="text-slate-700" />
+                          <span className="text-[10px] sm:text-[11px] font-mono font-black uppercase text-slate-800 tracking-wider">
+                            Mechanical Key Deck // 8 Keys
+                          </span>
+                        </div>
+                        <span className="text-[9px] font-mono font-bold text-slate-500 bg-slate-200/80 px-2 py-0.5 rounded border border-slate-300">
+                          {activeSkillsByGroup[group.id] ? '[CLICK TO SWITCH]' : '[CLICK TO ENGAGE]'}
+                        </span>
+                      </div>
+
+                      {/* 3D Mechanical Keyboard Keycaps Grid */}
+                      <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
+                        {group.skills.map((skill) => {
+                          const Icon = skill.icon;
+                          const isKeyActive = activeSkillsByGroup[group.id]?.name === skill.name;
+
+                          return (
+                            <button
+                              key={skill.name}
+                              type="button"
+                              onClick={() => {
+                                playKeyClick();
+                                setActiveSkillsByGroup((prev) => ({
+                                  ...prev,
+                                  [group.id]: prev[group.id]?.name === skill.name ? null : skill,
+                                }));
+                              }}
+                              style={{
+                                borderColor: isKeyActive ? skill.color : undefined,
+                                boxShadow: isKeyActive
+                                  ? `0 2px 0 #0f172a, 0 0 12px ${skill.color}50`
+                                  : undefined,
+                                transform: isKeyActive ? 'translateY(3px)' : undefined,
+                              }}
+                              className={`mechanical-keycap p-2 sm:p-2.5 flex flex-col items-center justify-between min-h-[96px] sm:min-h-[102px] group text-left relative focus:outline-none ${
+                                isKeyActive ? 'ring-2 ring-pink-500/80 bg-slate-100' : ''
                               }`}
+                              title={`Press to type details: ${skill.name} (${skill.level})`}
                             >
-                              {skill.level}
-                            </span>
-                          </div>
-                        );
-                      })}
+                              {/* Top LED Indicator / Keycap Stem Slit */}
+                              <div className="w-full flex items-center justify-between mb-1 px-0.5">
+                                <span
+                                  className={`w-2.5 h-1 rounded-full shadow-xs transition-all ${
+                                    isKeyActive ? 'scale-150 shadow-[0_0_8px_currentColor]' : 'group-hover:scale-125'
+                                  }`}
+                                  style={{
+                                    backgroundColor: skill.color,
+                                    color: skill.color,
+                                  }}
+                                />
+                                <span
+                                  className={`text-[7.5px] font-mono font-bold transition-colors ${
+                                    isKeyActive ? 'text-slate-900' : 'text-slate-400 group-hover:text-slate-700'
+                                  }`}
+                                >
+                                  {isKeyActive ? 'ON' : 'MX-SW'}
+                                </span>
+                              </div>
+
+                              {/* Keycap Center Dish Surface */}
+                              <div className="keycap-dish w-full py-1.5 px-1 flex flex-col items-center gap-1.5 transition-transform group-hover:scale-[1.02]">
+                                <div
+                                  className={`flex h-6 w-6 items-center justify-center rounded-md border border-slate-900/10 bg-white shadow-xs transition-transform ${
+                                    isKeyActive ? 'scale-115 shadow-sm' : 'group-hover:scale-110'
+                                  }`}
+                                  style={{ color: skill.color }}
+                                >
+                                  {skill.isFa ? (
+                                    <FontAwesomeIcon icon={Icon} size="sm" />
+                                  ) : (
+                                    <Icon size={14} />
+                                  )}
+                                </div>
+                                <span className="text-[10.5px] sm:text-[11.5px] font-black text-slate-900 leading-tight text-center tracking-tight font-['Space_Grotesk'] line-clamp-1">
+                                  {skill.name}
+                                </span>
+                              </div>
+
+                              {/* Keycap Sub-legend / Level Badge Stamped on Bottom */}
+                              <div className="w-full pt-1 flex justify-center">
+                                <span
+                                  className={`text-[8px] sm:text-[8.5px] font-mono font-black uppercase px-1.5 py-0.2 rounded border border-slate-900/20 ${
+                                    skill.badgeClass || 'bg-white text-slate-800'
+                                  }`}
+                                >
+                                  {skill.level}
+                                </span>
+                              </div>
+                            </button>
+                          );
+                        })}
+                      </div>
                     </div>
                   </motion.div>
                 );
